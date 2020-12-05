@@ -5,6 +5,8 @@ import SearchIcon from '@material-ui/icons/Search';
 
 
 interface props {
+
+    onFilterFriends: (name: string) => void,
     searchFriends : Array<searchFriendType>,
     setSearch: (searchFriends : Array<searchFriendType>)=> void
 }
@@ -12,19 +14,26 @@ interface props {
 const SearchFriendsComponent: FunctionComponent <props> = (props) => {
 
     const [isCollapsedFriend, setIsCollapsedFriend] = useState<boolean>(false)
-    const [value, setValue] = useState<string>( '')
+
 
 
     const ShowCollapsedFriend = ()=> setIsCollapsedFriend(!isCollapsedFriend)
-    const onChangeFriendHandler = (event: ChangeEvent <HTMLTextAreaElement | HTMLInputElement> ) =>
-    {setValue(event.currentTarget.value)}
+    const onSearchChangeFilterKeyPress = (event: ChangeEvent <HTMLInputElement | HTMLTextAreaElement>) =>{
+
+        props.onFilterFriends(event.currentTarget.value)
+    }
+
+
+
+
+
     return(<div>
         <div>
             <div>
                 <TextField onClick={ShowCollapsedFriend}
-                           onChange = { onChangeFriendHandler }
-                           value ={value}
-                           type = 'text'
+                            onBlur={ShowCollapsedFriend}
+
+                           onChange = {(event)=> onSearchChangeFilterKeyPress(event)}
                 id="standard-secondary" label="Faster search Friends" color="primary" />
             </div>
 
