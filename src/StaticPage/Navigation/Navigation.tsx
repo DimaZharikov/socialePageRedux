@@ -1,11 +1,12 @@
-import React, {FunctionComponent} from 'react'
-
+import React from 'react';
 import {NavLink} from "react-router-dom";
 
 
+interface NavigationProps {
 
+}
 
-const Navigation: FunctionComponent <any> = (props: any) => {
+export const Navigation = (props: NavigationProps) => {
     return(
         <nav>
             <div >
@@ -25,5 +26,5 @@ const Navigation: FunctionComponent <any> = (props: any) => {
 
 }
 
+export default Navigation
 
-export default Navigation;

@@ -103,17 +103,21 @@ interface Action<T> {
 }
 
 export enum ActionType {
-    FILTER_MESSAGE_AC = "FILTER-MESSAGE-ACTION_CREATER",
     ON_REMOVE_DIALOGUE_ITEMS = "REMOVE-DIALOG-ITEMS",
-    SET_SEARCH_FRIENDS_AC = "SET-SEARCH-FRIENDS-AC"
+    SET_SEARCH_FRIENDS_AC = "SET-SEARCH-FRIENDS-AC",
+    SET_MESSAGE_ITEMS_AC = "SET-MESSAGE-ITEMS-AC"
 }
 
 
-export const onFilterMessageHandler = (messageItems: messageItemType): Action<messageItemType> => ({
-    type: ActionType.FILTER_MESSAGE_AC,
-    payload: messageItems
+export const setSearchFriendsAC = (searchFriends: Array<searchFriendType> ): Action<Array<searchFriendType>>  => ({
+    type: ActionType.SET_SEARCH_FRIENDS_AC,
+    payload: searchFriends
 })
 
+export const setMessageItemsAC = (messageItems: Array<messageItemType>) => ({
+    type: ActionType.SET_MESSAGE_ITEMS_AC,
+    payload: messageItems
+})
 
 export const onRemoveDialogueItemsAC = (id: string): Action<string> => ({
     type: ActionType.ON_REMOVE_DIALOGUE_ITEMS,
@@ -121,7 +125,7 @@ export const onRemoveDialogueItemsAC = (id: string): Action<string> => ({
 })
 
 
-const MessagePageReducer = (state = initialState, action: Action<any>) => {
+const messagePageReducer = (state = initialState, action: Action<any>) => {
     switch (action.type) {
         case ActionType.ON_REMOVE_DIALOGUE_ITEMS: {
             return {
@@ -133,7 +137,10 @@ const MessagePageReducer = (state = initialState, action: Action<any>) => {
         }
 
         case ActionType.SET_SEARCH_FRIENDS_AC: {
-            return {...state, searchFriends: [...state.searchFriends, action.payload]}
+            return {...state, searchFriends: [action.payload, ...state.searchFriends]}
+        }
+        case ActionType.SET_MESSAGE_ITEMS_AC: {
+            return {...state,messageItems: [action.payload, ...state.messageItems]}
         }
     }
     return state;
@@ -141,5 +148,5 @@ const MessagePageReducer = (state = initialState, action: Action<any>) => {
 
 
 
-export default MessagePageReducer;
+export default messagePageReducer;
 
