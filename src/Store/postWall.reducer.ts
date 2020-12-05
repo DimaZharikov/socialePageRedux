@@ -8,7 +8,7 @@ export type ItemPostType = {
     ImgPerson: string,
     imgShare: string,
     imgBtnDeletePost: string,
-    time: string,
+
     content: string,
     counterLikes: number
 
@@ -32,7 +32,7 @@ let ininitaialState: StateProps = {
             ImgPerson: "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png",
             imgShare: "https://img.icons8.com/metro/52/000000/forward-arrow.png",
             imgBtnDeletePost: "https://img.icons8.com/ios/50/000000/delete-message.png",
-            time: '12:13',
+
             content: 'AnyMessagePost'
         }
     ]
@@ -78,7 +78,8 @@ const postWallReducer = (state = ininitaialState, action: Action<ActionType>) =>
 
     switch (action.type) {
 
-        case ActionType.ADD_NEW_POST: {
+        case ActionType.ADD_NEW_POST:{
+
             const newPost: ItemPostType = {
                 id: v1(),
                 person: {name: 'Dima', secondName: 'Zharikov'},
@@ -87,35 +88,27 @@ const postWallReducer = (state = ininitaialState, action: Action<ActionType>) =>
                 ImgPerson: "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png",
                 imgShare: "https://img.icons8.com/metro/52/000000/forward-arrow.png",
                 imgBtnDeletePost: "https://img.icons8.com/ios/50/000000/delete-message.png",
-                time: '12:13',
+
                 content: action.payload
             }
-            state.itemsPost.unshift(newPost)
+            return {...state, itemsPost: [newPost, ...state.itemsPost]}
+            // state.itemsPost.unshift(newPost)
         }
-            return state
 
         case ActionType.ON_CHANGE_NEW_POST_TEXT: {
-            state.messageForNewPost = action.payload
-            return state
+
+            return {...state, messageForNewPost: action.payload}
         }
 
 
         case ActionType.SET_POST_ITEM_AC:{
             return {...state, itemsPost: [state.itemsPost,action.payload]}
-
-
         }
 
         case ActionType.ON_REMOVE_POST_HANDLER: {
             return {
                 ...state,
-                itemsPost: state.itemsPost.filter(itms=> {
-                    if(itms.id !== action.payload){
-                        return {...itms, state}
-                    }
-                    return itms
-                })
-
+                itemsPost: state.itemsPost.filter(t => t.id !== action.payload)
             }
         }
 

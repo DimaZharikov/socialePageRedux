@@ -1,21 +1,21 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {
-    ActionType, ItemPostType,
+     ItemPostType,
     onAddNewPostHandler,
     onChangeTextPost,
     onRemovePostCreater, setItemPostAC,
-    StateProps
+
 } from "../../../Store/postWall.reducer";
 import PostWallComponent from "./PostWallComponent";
 import {Dispatch} from "redux";
 
 
 
-let mapStateToProps  = (state:StateProps ) => {
+let mapStateToProps  = (state:{postBlock:{itemsPost: Array <ItemPostType>,messageForNewPost: string } } ) => {
     return {
-        itemsPost: state.itemsPost,
-        messageForNewPost : state.messageForNewPost
+        itemsPost: state.postBlock.itemsPost,
+        messageForNewPost : state.postBlock.messageForNewPost
     }
 }
 

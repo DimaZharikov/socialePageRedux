@@ -120,23 +120,15 @@ export const onRemoveDialogueItemsAC = (id: string): Action<string> => ({
     payload: id
 })
 
-export const setFriendsDialogueForSearch = (searchFriends: searchFriendType): Action<searchFriendType> => ({
-    type: ActionType.SET_SEARCH_FRIENDS_AC,
-    payload: searchFriends
-})
-
 
 const MessagePageReducer = (state = initialState, action: Action<any>) => {
     switch (action.type) {
         case ActionType.ON_REMOVE_DIALOGUE_ITEMS: {
             return {
                 ...state,
-                messageItems: state.messageItems.filter(d => {
-                    if (d.id !== action.payload) {
-                        return {...d, state}
-                    }
-                    return d
-                })
+                messageItems: state.messageItems.filter(d =>
+                     d.id !== action.payload
+                    )
             }
         }
 

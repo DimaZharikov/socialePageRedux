@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
 
-import {ActionType, followAC, friendsType, setFriendAC, stateType, unFollowAC} from "../../Store/Friend.Reducer";
+import {followAC, friendsType, setFriendAC,  unFollowAC} from "../../Store/FriendsPage.Reducer";
 import FriendComponent from "./FriendComponent";
 import {Dispatch} from "redux";
 

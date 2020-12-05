@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react'
-import {friendsType, stateType} from "../../Store/Friend.Reducer";
+import {friendsType, stateType} from "../../Store/FriendsPage.Reducer";
 
 interface Props {
     follow: (id: string) => void,
