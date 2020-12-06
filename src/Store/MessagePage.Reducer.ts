@@ -9,6 +9,7 @@ export interface searchFriendType {
     Profile_online: boolean
 }
 
+export type ChangeFilterType = 'All' | 'Unread' | 'Important';
 
 export interface messageItemType {
     id: string,
@@ -16,14 +17,14 @@ export interface messageItemType {
     secondName: string,
     message: string,
     imgUrl: string,
-    time: string,
+
     profile_online: boolean,
-    importantly: "All" | "Unread" | "Important"
+    importantly: ChangeFilterType
 }
 
 
 export interface messagePageType {
-    searchInput: string
+
     searchFriends: Array<searchFriendType>,
     messageItems: Array<messageItemType>
 
@@ -31,7 +32,7 @@ export interface messagePageType {
 
 
 const initialState: messagePageType = {
-    searchInput: '',
+
     searchFriends: [
         {
             id: v1(),
@@ -67,7 +68,7 @@ const initialState: messagePageType = {
             secondName: "SecondName",
             message: "Any Message From Person",
             imgUrl: "https://img.icons8.com/emoji/48/000000/neutral-person-medium-dark-skin-tone.png",
-            time: "timeDate",
+
 
             profile_online: true,
             importantly: 'Unread'
@@ -78,7 +79,7 @@ const initialState: messagePageType = {
             secondName: "SecondName",
             message: "Any Message From Person",
             imgUrl: "https://img.icons8.com/emoji/48/000000/neutral-person-medium-dark-skin-tone.png",
-            time: "timeDate",
+
 
             profile_online: true,
             importantly: 'All'
@@ -89,9 +90,9 @@ const initialState: messagePageType = {
             secondName: "SecondName",
             message: "Any Message From Person",
             imgUrl: "https://img.icons8.com/emoji/48/000000/neutral-person-medium-dark-skin-tone.png",
-            time: "timeDate",
 
-            profile_online: true,
+
+            profile_online: false,
             importantly: 'Important'
         },
 
@@ -154,12 +155,6 @@ const messagePageReducer = (state = initialState, action: Action<any>) => {
             }
              return initialState
         }
-        // let name = state.searchFriends.find(n => n.name.toLowerCase().includes(state.searchInput))
-        // if(name){
-        //     name = action.payload
-        //     return [...state.searchFriends]
-        // }
-        // return null.
 
 
         case ActionType.ON_REMOVE_DIALOGUE_ITEMS: {
@@ -173,6 +168,7 @@ const messagePageReducer = (state = initialState, action: Action<any>) => {
         case ActionType.SET_MESSAGE_ITEMS_AC: {
             return {...state, messageItems: [action.payload, ...state.messageItems]}
         }
+
     }
     return state;
 }

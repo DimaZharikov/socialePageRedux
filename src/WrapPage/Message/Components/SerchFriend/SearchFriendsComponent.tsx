@@ -23,23 +23,14 @@ const SearchFriendsComponent: FunctionComponent <props> = (props) => {
         props.onFilterFriends(event.currentTarget.value)
     }
 
-
-
-
-
     return(<div>
         <div>
             <div>
                 <TextField onClick={ShowCollapsedFriend}
                             onBlur={ShowCollapsedFriend}
-
                            onChange = {(event)=> onSearchChangeFilterKeyPress(event)}
-                id="standard-secondary" label="Faster search Friends" color="primary" />
+                            id="standard-secondary" label="Faster search Friends" color="primary" />
             </div>
-
-                <div>
-                    <IconButton color = 'primary' > <SearchIcon /> </IconButton>
-                </div>
 
 
         </div>
