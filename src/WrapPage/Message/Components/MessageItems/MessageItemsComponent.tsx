@@ -14,39 +14,25 @@ interface props {
     setMessage: (messageItems: Array<messageItemType>) => void
 }
 
-const MessageItemsComponent: FunctionComponent<props> = (props) => {
+const MessageItemsComponent: React.FunctionComponent<props> = (props) => {
 
 // ChangeFiler --
-    const [messages, setMessages] = useState<messageItemType[]>([]);
+    const [messages, setMessages] = useState<messageItemType[]>(props.messageItems);
     const [filter, setFilter]= useState<ChangeFilterType>('All');
 
-
-    useEffect(() => {
-        if (props.messageItems) {
-            setMessages((props.messageItems));
-        }
-    }, [props.messageItems])
-
-    useEffect(()=> {
-        if (filter === 'All') {
-            setMessages(props.messageItems)
-        } 
+    let filteredMessage = props.messageItems
 
         if (filter === 'Unread') {
-             const filteredMessage = messages.filter(m=> m.importantly === 'Unread');
-             setMessages(filteredMessage);
-
+            filteredMessage = filteredMessage.filter(m=> m.importantly === 'Unread');
         }
+
         if (filter === 'Important'){
-            const filteredMessage = messages.filter(m => m.importantly === 'Important')
-            setMessages(filteredMessage)
+           filteredMessage = filteredMessage.filter(m => m.importantly === 'Important')
         }
 
-
-    }, [filter, messages, props.messageItems])
 // -- ChangeFilter
 
-    return (<div>
+    return <div>
         <div>
             <button onClick={()=> setFilter('All')} >All</button>
             <button onClick={()=> setFilter('Unread')} >Unread</button>
@@ -54,7 +40,7 @@ const MessageItemsComponent: FunctionComponent<props> = (props) => {
         </div>
 
         <div>
-           {  messages.map((item) =>
+           {  filteredMessage.map((item) =>
                <div key={item.id}>
                        <div>
                            <div>
@@ -79,7 +65,7 @@ const MessageItemsComponent: FunctionComponent<props> = (props) => {
                                </div>
                            </div>
                            <div>
-                               <NavLink exact to={'/WrapMessage' + item.id}><p>{item.message}</p></NavLink>
+                               <NavLink exact to={`/WrapMessage${item.id}`}><p>{item.message}</p></NavLink>
                            </div>
                        </div>
 
@@ -88,7 +74,7 @@ const MessageItemsComponent: FunctionComponent<props> = (props) => {
 
        </div>
 
-    </div>)
+    </div>
 }
 
 export default MessageItemsComponent

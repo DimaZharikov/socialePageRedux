@@ -11,7 +11,7 @@ interface props {
     setSearch: (searchFriends : Array<searchFriendType>)=> void
 }
 
-const SearchFriendsComponent: FunctionComponent <props> = (props) => {
+const SearchFriendsComponent: React.FunctionComponent <props> = (props) => {
 
     const [isCollapsedFriend, setIsCollapsedFriend] = useState<boolean>(false)
 
@@ -27,7 +27,7 @@ const SearchFriendsComponent: FunctionComponent <props> = (props) => {
         <div>
             <div>
                 <TextField onClick={ShowCollapsedFriend}
-                            onBlur={ShowCollapsedFriend}
+                            onBlur={()=>setIsCollapsedFriend(false)}
                            onChange = {(event)=> onSearchChangeFilterKeyPress(event)}
                             id="standard-secondary" label="Faster search Friends" color="primary" />
             </div>

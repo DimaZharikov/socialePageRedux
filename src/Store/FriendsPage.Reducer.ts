@@ -1,70 +1,33 @@
-import {v1} from "uuid";
 
 
-export interface friendsType {
-    id: string,
-    followed: boolean,
-    online: boolean
-    avatar: string,
+
+export interface friendsType  {
     name: string,
-    secondName: string,
-    status: string,
-    location: { city: string, country: string }
+    id: string,
+    uniqueUrlName: string ,
+    photos:{ small: string | null ,
+            large: string },
+    status: string ,
+    followed: boolean
+
 }
 
 export interface stateType {
     friends: Array<friendsType>
+    pageSize: number,
+    totalFriendCount: number,
+    currentPage: number
+
 }
 
 const initialState: stateType = {
-    friends: [
-        {
-            id: v1(),
-            followed: true,
-            online: false,
-            avatar: "https://img.icons8.com/ios-filled/50/000000/change-user-male.png",
-            name: 'Dmitriy', secondName: 'Brauned',
-            status: 'Any text from Status',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: v1(),
-            followed: true,
-            online: false,
-            avatar: "https://img.icons8.com/ios-filled/50/000000/change-user-male.png",
-            name: 'Janya', secondName: 'Belousova',
-            status: 'Any text from Status',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: v1(),
-            followed: true,
-            online: true,
-            avatar: "https://img.icons8.com/ios-filled/50/000000/change-user-male.png",
-            name: 'Janya', secondName: 'Belousova',
-            status: 'Any text from Status',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: v1(),
-            online: true,
-            followed: true,
-            avatar: "https://img.icons8.com/ios-filled/50/000000/change-user-male.png",
-            name: 'Nikita', secondName: 'Bragin',
-            status: 'Any text from Status',
-            location: {city: 'Bratsk', country: 'Russian Fediration'}
-        },
-        {
-            id: v1(),
-            followed: true,
-            online: false,
-            avatar: "https://img.icons8.com/ios-filled/50/000000/change-user-male.png",
-            name: 'Nikita', secondName: 'Bragin',
-            status: 'Any text from Status',
-            location: {city: 'Bratsk', country: 'Russian Fediration'}
-        },
-    ]
+    friends: [    ],
+    pageSize: 5,
+    totalFriendCount: 19,
+    currentPage: 3
 }
+
+
 
 interface Action<T> {
     type: ActionType,
@@ -72,11 +35,13 @@ interface Action<T> {
 }
 
 
+
 export enum ActionType {
     ON_UNFOLLOW_AC = "ON-UNFOLLOW-AC",
     FOLLOW_AC = 'FOLLOW-AC',
     SET_FRIEND_AC = 'SET-FRIEND-AC',
-    IS_ONLINE = 'IS_ONLINE'
+    SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
+
 }
 
 
@@ -91,10 +56,14 @@ export const followAC = (id: string): Action<string> => ({
 })
 
 
-
 export const setFriendAC = (newFriends: friendsType): Action<friendsType> => ({
     type: ActionType.SET_FRIEND_AC,
     payload: newFriends
+})
+
+export const setCurrentPageAC = (currentPage: number): Action<number> =>  ({
+    type: ActionType.SET_CURRENT_PAGE,
+    payload: currentPage
 })
 
 
@@ -126,11 +95,16 @@ const friendsReducer = (state = initialState, action: Action <any>): stateType =
 
 
         case ActionType.SET_FRIEND_AC: {
-            return {...state, friends: [...state.friends, action.payload]}
+            return {...state, friends: action.payload}
+        }
+        case ActionType.SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.payload }
         }
     }
     return state
 }
+
+
 
 
 export default friendsReducer;

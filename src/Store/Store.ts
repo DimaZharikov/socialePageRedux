@@ -13,7 +13,7 @@ const reducer = combineReducers({
 
 
 
-export let store = createStore(reducer);
+export const store = createStore(reducer);
 
 
 
