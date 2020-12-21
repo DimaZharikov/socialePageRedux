@@ -79,8 +79,6 @@ const initialState: messagePageType = {
             secondName: "SecondName",
             message: "Any Message From Person",
             imgUrl: "https://img.icons8.com/emoji/48/000000/neutral-person-medium-dark-skin-tone.png",
-
-
             profile_online: true,
             importantly: 'All'
         },

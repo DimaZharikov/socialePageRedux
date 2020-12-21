@@ -16,7 +16,8 @@ export interface stateType {
     friends: Array<friendsType>
     pageSize: number,
     totalFriendCount: number,
-    currentPage: number
+    currentPage: number,
+    isFetching: boolean
 
 }
 
@@ -24,7 +25,8 @@ const initialState: stateType = {
     friends: [    ],
     pageSize: 5,
     totalFriendCount: 19,
-    currentPage: 3
+    currentPage: 1,
+    isFetching: false,
 }
 
 
@@ -40,7 +42,8 @@ export enum ActionType {
     ON_UNFOLLOW_AC = "ON-UNFOLLOW-AC",
     FOLLOW_AC = 'FOLLOW-AC',
     SET_FRIEND_AC = 'SET-FRIEND-AC',
-    SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
+    SET_CURRENT_PAGE = 'SET-CURRENT-PAGE',
+    TOGGLE_IS_FETCHING = 'TOGLIE_IS_FETCHING'
 
 }
 
@@ -66,6 +69,10 @@ export const setCurrentPageAC = (currentPage: number): Action<number> =>  ({
     payload: currentPage
 })
 
+export const toggleIsFetchingAC = (isFetching: boolean): Action<boolean> =>  ( {
+    type: ActionType.TOGGLE_IS_FETCHING,
+    payload: isFetching
+})
 
 const friendsReducer = (state = initialState, action: Action <any>): stateType => {
     switch (action.type) {
@@ -99,6 +106,9 @@ const friendsReducer = (state = initialState, action: Action <any>): stateType =
         }
         case ActionType.SET_CURRENT_PAGE: {
             return {...state, currentPage: action.payload }
+        }
+        case ActionType.TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.payload}
         }
     }
     return state
