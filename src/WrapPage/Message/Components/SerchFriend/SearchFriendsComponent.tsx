@@ -1,7 +1,6 @@
-import React, {ChangeEvent, FunctionComponent, useState} from 'react'
+import React, {ChangeEvent, useCallback, useState} from 'react'
 import {searchFriendType} from "../../../../Store/MessagePage.Reducer";
-import {IconButton, TextField} from "@material-ui/core";
-import SearchIcon from '@material-ui/icons/Search';
+import {TextField} from "@material-ui/core";
 
 
 interface props {
@@ -11,17 +10,17 @@ interface props {
     setSearch: (searchFriends : Array<searchFriendType>)=> void
 }
 
-const SearchFriendsComponent: React.FunctionComponent <props> = (props) => {
+const SearchFriendsComponent: React.FunctionComponent <props> = ({onFilterFriends,searchFriends,setSearch}) => {
 
     const [isCollapsedFriend, setIsCollapsedFriend] = useState<boolean>(false)
 
 
 
-    const ShowCollapsedFriend = ()=> setIsCollapsedFriend(!isCollapsedFriend)
-    const onSearchChangeFilterKeyPress = (event: ChangeEvent <HTMLInputElement | HTMLTextAreaElement>) =>{
+    const ShowCollapsedFriend = useCallback(()=> setIsCollapsedFriend(!isCollapsedFriend),[isCollapsedFriend] )
+    const onSearchChangeFilterKeyPress = useCallback((event: ChangeEvent <HTMLInputElement | HTMLTextAreaElement>) =>{
 
-        props.onFilterFriends(event.currentTarget.value)
-    }
+       onFilterFriends(event.currentTarget.value)
+    },[])
 
     return(<div>
         <div>
@@ -36,7 +35,7 @@ const SearchFriendsComponent: React.FunctionComponent <props> = (props) => {
         </div>
 
         {
-            isCollapsedFriend && props.searchFriends.map( items => {
+            isCollapsedFriend && searchFriends.map( items => {
                 return (
                     <div key = {items.id}>
                         <img src={items.img} alt="There was y Friend"/>

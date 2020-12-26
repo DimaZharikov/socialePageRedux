@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from 'react'
+import React, {FunctionComponent, useCallback, useEffect, useState} from 'react'
 import {ChangeFilterType, messageItemType} from "../../../../Store/MessagePage.Reducer";
 import {NavLink} from "react-router-dom";
 
@@ -14,21 +14,25 @@ interface props {
     setMessage: (messageItems: Array<messageItemType>) => void
 }
 
-const MessageItemsComponent: React.FunctionComponent<props> = (props) => {
-
+const MessageItemsComponent: React.FunctionComponent<props> = React.memo((props) => {
+    console.log('changed')
 // ChangeFiler --
     const [messages, setMessages] = useState<messageItemType[]>(props.messageItems);
     const [filter, setFilter]= useState<ChangeFilterType>('All');
 
-    let filteredMessage = props.messageItems
 
-        if (filter === 'Unread') {
-            filteredMessage = filteredMessage.filter(m=> m.importantly === 'Unread');
-        }
+        let filteredMessage = props.messageItems
 
-        if (filter === 'Important'){
-           filteredMessage = filteredMessage.filter(m => m.importantly === 'Important')
-        }
+    if (filter === 'Unread') {
+        filteredMessage = filteredMessage.filter(m=> m.importantly === 'Unread');
+    }
+
+    if (filter === 'Important'){
+        filteredMessage = filteredMessage.filter(m => m.importantly === 'Important')
+    }
+
+
+
 
 // -- ChangeFilter
 
@@ -75,6 +79,6 @@ const MessageItemsComponent: React.FunctionComponent<props> = (props) => {
        </div>
 
     </div>
-}
+})
 
 export default MessageItemsComponent

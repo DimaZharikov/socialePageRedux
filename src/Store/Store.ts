@@ -1,11 +1,11 @@
 import {combineReducers, createStore} from "redux";
-import postWallReducer from "./postWall.reducer";
 import friendsReducer from "./FriendsPage.Reducer";
 import messagePageReducer from "./MessagePage.Reducer";
+import profilePageReducer from "./Profile.Reducer";
 
 
 const reducer = combineReducers({
-    postBlock: postWallReducer,
+    profilePage: profilePageReducer,
     friendsPage: friendsReducer,
     messagePage: messagePageReducer
 

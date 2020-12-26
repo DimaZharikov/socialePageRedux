@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {friendsType} from "../../Store/FriendsPage.Reducer";
+import {NavLink} from "react-router-dom";
 
 
 interface Props {
     follow: (id: string) => void,
-    unFollowAC: (id: string) => void,
+    unFollow: (id: string) => void,
     setFriend: (newFriends: friendsType) => void;
     friends: Array<friendsType>,
     pageSize: number,
@@ -15,11 +16,12 @@ interface Props {
 
 }
 
+//setFriends - AC for .get from server searchFriends
+const FriendsComponent: React.FunctionComponent<Props> = React.memo ((
+    {follow,unFollow,setFriend,friends,pageSize,totalFriendCount,currentPage,setCurrentPage,onPageChangeHandler}) => {
 
-const FriendsComponent: React.FunctionComponent<Props> = (props) => {
 
-
-    const pageCount = Math.ceil(props.totalFriendCount / props.pageSize)
+    const pageCount = Math.ceil(totalFriendCount / pageSize)
     const pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i)
@@ -32,31 +34,32 @@ const FriendsComponent: React.FunctionComponent<Props> = (props) => {
                 pages.map(p => {
                     return (
 
-                        <span onClick={() => props.onPageChangeHandler(p)}>{p}</span>
+                        <span onClick={() => onPageChangeHandler(p)}>{p}</span>
                     )
                 })
             }
         </div>
 
         {
-            props.friends.map(items => {
+            friends.map(items => {
                 return (
                     <div key={items.id}>
                         <div>
                             <div>
-                                <img
-                                    src={items.photos.small != null ? items.photos.small : "https://img.icons8.com/ios-glyphs/100/000000/change-user-male.png"}
-                                    alt=""/>
-                                {items.status ?
-                                    <img src="https://img.icons8.com/color/12/000000/connection-status-on--v1.png"/>
-                                    : ''
-                                }
-
+                                <NavLink to={ '/profile/' + items.id}>
+                                    <img
+                                        src={items.photos.small != null ? items.photos.small : "https://img.icons8.com/ios-glyphs/100/000000/change-user-male.png"}
+                                        alt=""/>
+                                    {items.status ?
+                                        <img src="https://img.icons8.com/color/12/000000/connection-status-on--v1.png"/>
+                                        : ''
+                                    }
+                                </NavLink>
                             </div>
                             {items.followed ?
-                                <button onClick={() => props.unFollowAC(items.id)}>Followed</button>
+                                <button onClick={() => unFollow(items.id)}>Followed</button>
                                 :
-                                <button onClick={() => props.follow(items.id)}>Unfollowed</button>
+                                <button onClick={() => follow(items.id)}>Unfollowed</button>
                             }
                         </div>
                         <div>
@@ -70,7 +73,7 @@ const FriendsComponent: React.FunctionComponent<Props> = (props) => {
                 )
             })
         }
-    </div>)
-}
+    </div>
+)})
 
 export default FriendsComponent;

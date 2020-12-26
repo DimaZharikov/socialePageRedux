@@ -5,13 +5,13 @@ import {messageItemType, onRemoveDialogueItemsAC, setMessageItemsAC} from "../..
 import {Dispatch} from "redux";
 
 
-let mapStateToProps = (state: {messagePage: {messageItems: Array<messageItemType>}}) => {
+const mapStateToProps = (state: {messagePage: {messageItems: Array<messageItemType>}}) => {
     return{
         messageItems: state.messagePage.messageItems
     }
 }
 
-let matDispatchToProps = (dispatch : Dispatch) => {
+const mapDispatchToProps = (dispatch : Dispatch) => {
     return{
         onRemoveDialogueItemsAC: (id: string) => {
             dispatch(onRemoveDialogueItemsAC(id))
@@ -26,4 +26,4 @@ let matDispatchToProps = (dispatch : Dispatch) => {
 
 
 
-export default connect (mapStateToProps, matDispatchToProps) (MessageItemsComponent)
+export default connect (mapStateToProps, mapDispatchToProps) (MessageItemsComponent)

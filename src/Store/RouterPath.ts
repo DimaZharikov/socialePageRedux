@@ -1,7 +1,8 @@
 enum RouterPath {
 
     mainPage = '/Main',
-    friends = '/Friends'
+    friends = '/Friends',
+    messages = '/messages'
 
 }
 

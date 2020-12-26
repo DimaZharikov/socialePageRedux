@@ -11,8 +11,8 @@ export const Navigation = (props: NavigationProps) => {
         <nav>
             <div >
 
-                <div><NavLink to={'/Main'}> <p>Main</p> </NavLink> </div>
-                <div><NavLink to={'/Friends'}><p>Friends</p>  </NavLink> </div>
+                <div><NavLink to={'/profile'}> <p>Profile</p> </NavLink> </div>
+                <div><NavLink to={'/friends'}><p>Friends</p>  </NavLink> </div>
                 <div><NavLink to={''}><p>Music</p></NavLink> </div>
                 <div><NavLink to={'/Message'}><p>Message</p></NavLink></div>
                 <div><NavLink to={''}><p>Video</p></NavLink></div>

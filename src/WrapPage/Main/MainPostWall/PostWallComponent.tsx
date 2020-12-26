@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useState} from "react"
-import {ItemPostType} from "../../../Store/postWall.reducer";
+import React, {ChangeEvent, useCallback, useState} from "react"
+import {ItemPostType} from "../../../Store/Profile.Reducer";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,26 +15,25 @@ interface Props {
 }
 
 
-const PostWallComponent = (props: Props) => {
+const PostWallComponent:React.FC<Props>  = React.memo((props) => {
 
     const [error, setError] = useState<string|null>(null)
 
-    const onChangeTextFieldHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const onChangeTextFieldHandler = useCallback ((event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         props.onChangeTextPost(event.currentTarget.value)
-    }
+    },[props.onChangeTextPost])
 
     const onAddNewPost = (content: string) => {
         if (props.messageForNewPost.trim() !==''){
             props.onAddNewPostHandler(content)
-
         }
 
 
     }
 
-    const onRemovePostHandler = (id: string) => {
+    const onRemovePostHandler = useCallback((id: string) => {
         props.onRemovePostCreater(id)
-    }
+    },[])
 
     const date = new Date()
     let hourse = date.getHours();
@@ -58,7 +57,7 @@ const PostWallComponent = (props: Props) => {
                                 <div>
                                     <div><img src={p.ImgPerson} alt=""/></div>
                                     <div>
-                                        <h4>{p.person.name} {p.person.secondName}</h4>
+                                        <h4>{p.fullName}</h4>
                                         <p>{`${hourse}:${minutes}`}</p>
                                     </div>
                                 </div>
@@ -87,6 +86,6 @@ const PostWallComponent = (props: Props) => {
 
 
     </div>)
-}
+})
 
 export default PostWallComponent;

@@ -1,10 +1,14 @@
 import React from 'react';
 
-import FriendConteiner from "./WrapPage/Friend/FriendConteiner";
-import MainPageConteiner from "./WrapPage/Main/MainConteiner";
-import {BrowserRouter, Route} from "react-router-dom";
+
+
 import Navigation from "./StaticPage/Navigation/Navigation";
-import MessagePageConteiner from "./WrapPage/Message/MessagePageConteiner";
+import MessagePageAppComponent from "./WrapPage/Message/MessagePageAppComponent";
+import MainPageConteiner from "./WrapPage/Main/MainAppComponent";
+import {BrowserRouter, Route} from "react-router-dom";
+import FriendContainer from "./WrapPage/Friend/FriendConteiner";
+
+
 
 
 
@@ -17,9 +21,10 @@ function App() {
 
 
             <div className='WrapPage -app'>
-                <Route path='/Main'  component ={MainPageConteiner} />
-                <Route exact path='/Friends' render= {()=> <FriendConteiner /> }/>
-                <Route exact path='/Message' component = {MessagePageConteiner}  />
+                <Route path='/profile/:userId?'  render ={()=><MainPageConteiner/>} />
+                <Route exact path='/friends' render= {()=> <FriendContainer /> }/>
+
+                <Route exact path='/Message' component = {MessagePageAppComponent}  />
             </div>
 
         </BrowserRouter>

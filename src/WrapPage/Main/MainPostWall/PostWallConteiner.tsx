@@ -5,21 +5,20 @@ import {
     onAddNewPostHandler,
     onChangeTextPost,
     onRemovePostCreater, setItemPostAC,
-
-} from "../../../Store/postWall.reducer";
+} from "../../../Store/Profile.Reducer";
 import PostWallComponent from "./PostWallComponent";
 import {Dispatch} from "redux";
 
 
 
-let mapStateToProps  = (state:{postBlock:{itemsPost: Array <ItemPostType>,messageForNewPost: string } } ) => {
+const mapStateToProps  = (state:{profilePage:{itemsPost: Array <ItemPostType>,messageForNewPost: string } } ) => {
     return {
-        itemsPost: state.postBlock.itemsPost,
-        messageForNewPost : state.postBlock.messageForNewPost
+        itemsPost: state.profilePage.itemsPost,
+        messageForNewPost : state.profilePage.messageForNewPost
     }
 }
 
-let mapDispatchToProps = (dispatch : Dispatch) => {
+const mapDispatchToProps = (dispatch : Dispatch) => {
     return{
         onAddNewPostHandler: (content: string) => {
             dispatch(onAddNewPostHandler(content))

@@ -1,6 +1,4 @@
 
-
-
 export interface friendsType  {
     name: string,
     id: string,
@@ -22,7 +20,7 @@ export interface stateType {
 }
 
 const initialState: stateType = {
-    friends: [    ],
+    friends: [ ],
     pageSize: 5,
     totalFriendCount: 19,
     currentPage: 1,
@@ -43,33 +41,33 @@ export enum ActionType {
     FOLLOW_AC = 'FOLLOW-AC',
     SET_FRIEND_AC = 'SET-FRIEND-AC',
     SET_CURRENT_PAGE = 'SET-CURRENT-PAGE',
-    TOGGLE_IS_FETCHING = 'TOGLIE_IS_FETCHING'
+    TOGGLE_IS_FETCHING = 'TOGGLIE_IS_FETCHING'
 
 }
 
 
-export const unFollowAC = (id: string): Action<string> => ({
+export const unFollow = (id: string): Action<string> => ({
     type: ActionType.ON_UNFOLLOW_AC,
     payload: id
 })
 
-export const followAC = (id: string): Action<string> => ({
+export const follow = (id: string): Action<string> => ({
     type: ActionType.FOLLOW_AC,
     payload: id
 })
 
 
-export const setFriendAC = (newFriends: friendsType): Action<friendsType> => ({
+export const setFriend = (newFriends: friendsType): Action<friendsType> => ({
     type: ActionType.SET_FRIEND_AC,
     payload: newFriends
 })
 
-export const setCurrentPageAC = (currentPage: number): Action<number> =>  ({
+export const setCurrentPage = (currentPage: number): Action<number> =>  ({
     type: ActionType.SET_CURRENT_PAGE,
     payload: currentPage
 })
 
-export const toggleIsFetchingAC = (isFetching: boolean): Action<boolean> =>  ( {
+export const toggleIsFetching = (isFetching: boolean): Action<boolean> =>  ( {
     type: ActionType.TOGGLE_IS_FETCHING,
     payload: isFetching
 })
