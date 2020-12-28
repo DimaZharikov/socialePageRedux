@@ -7,6 +7,7 @@ import MessagePageAppComponent from "./WrapPage/Message/MessagePageAppComponent"
 import MainPageConteiner from "./WrapPage/Main/MainAppComponent";
 import {BrowserRouter, Route} from "react-router-dom";
 import FriendContainer from "./WrapPage/Friend/FriendConteiner";
+import HeaderAppComponent from "./StaticPage/Header/HeaderAppComponent";
 
 
 
@@ -17,6 +18,7 @@ function App() {
     return (<div>
 
         <BrowserRouter>
+            <HeaderAppComponent />
             <Navigation/>
 
 
