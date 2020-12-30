@@ -13,6 +13,8 @@ import FriendsComponent from "./FriendsComponent";
 import {connect} from "react-redux";
 
 import Preloader from "../../common/preloader/Preloader";
+import {FriendsAPI, FriendsPropsTypeAPI} from "../../Store/API/API";
+
 
 
 
@@ -29,17 +31,23 @@ interface Props {
     isFetching: boolean
 
 
+
+
+
 }
 
  class FriendContainer extends React.Component<Props> {
 
 
+
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
+
+
+        FriendsAPI.getUsers(this.props.pageSize, this.props.currentPage)
+            .then((data) => {
                 this.props.toggleIsFetching(false)
-                this.props.setFriend(response.data.items)
+                this.props.setFriend(data.items)
             })
 
     }
@@ -47,10 +55,10 @@ interface Props {
     onPageChangeHandler = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then
-        (response => {
+        FriendsAPI.getUsers(this.props.pageSize, this.props.currentPage)
+            .then (data => {
             this.props.toggleIsFetching(false)
-            this.props.setFriend(response.data.items)
+            this.props.setFriend(data.items)
 
         })
     }
