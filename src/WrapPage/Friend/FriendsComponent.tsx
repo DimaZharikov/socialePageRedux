@@ -2,13 +2,14 @@ import React from 'react'
 import {friendsType} from "../../Store/FriendsPage.Reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {itemsBackPropsToFriends} from "../../Store/API/API";
 
 
 interface Props {
-    follow: (id: string) => void,
-    unFollow: (id: string) => void,
-    setFriend: (newFriends: friendsType) => void;
-    friends: Array<friendsType>,
+    follow: (id: number) => void,
+    unFollow: (id: number) => void,
+    setFriend: (newFriends: Array<itemsBackPropsToFriends>) => void;
+    friends: Array<itemsBackPropsToFriends>,
     pageSize: number,
     totalFriendCount: number,
     currentPage: number,
@@ -50,25 +51,25 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
             </div>
 
             {
-                friends.map(items => {
+                friends.map(item => {
                     return (
-                        <div key={items.id}>
+                        <div key={item.id}>
                             <div>
                                 <div>
-                                    <NavLink to={'/profile/' + items.id}>
+                                    <NavLink to={'/profile/' + item.id}>
                                         <img
-                                            src={items.photos.small != null ? items.photos.small : "https://img.icons8.com/ios-glyphs/100/000000/change-user-male.png"}
+                                            src={item.photos.small != null ? item.photos.small : "https://img.icons8.com/ios-glyphs/100/000000/change-user-male.png"}
                                             alt=""/>
-                                        {items.status ?
+                                        {item.status ?
                                             <img
                                                 src="https://img.icons8.com/color/12/000000/connection-status-on--v1.png" alt={'pictures'}/>
                                             : ''
                                         }
                                     </NavLink>
                                 </div>
-                                {items.followed ?
+                                {item.followed ?
                                     <button onClick={() => {
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${items.id}`
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${item.id}`
                                             , {
                                                 withCredentials: true,
                                                 headers: {
@@ -77,7 +78,7 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
                                             })
                                             .then(response => {
                                                 if (response.data.resultCode === 0) {
-                                                    unFollow(items.id)
+                                                    unFollow(item.id)
                                                 }
                                             })
                                     }}>
@@ -85,7 +86,7 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
 
                                     :
                                     <button onClick={() => {
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${items.id}`,
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${item.id}`,
                                             {}, {
                                                 withCredentials: true,
                                                 headers: {
@@ -94,7 +95,7 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
                                             })
                                             .then(response => {
                                                 if (response.data.resultCode === 0) {
-                                                    follow(items.id)
+                                                    follow(item.id)
                                                 }
                                             })
                                     }}
@@ -105,8 +106,8 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
                             </div>
                             <div>
                                 <div>
-                                    <h3>{items.name} {items.uniqueUrlName}</h3>
-                                    <h4>{items.status}</h4>
+                                    <h3>{item.name} {item.uniqueUrlName}</h3>
+                                    <h4>{item.status}</h4>
                                 </div>
 
                             </div>

@@ -1,14 +1,17 @@
+import {itemsBackPropsToFriends} from "./API/API";
 
 export interface friendsType  {
     name: string,
     id: string,
-    uniqueUrlName: string ,
+    uniqueUrlName: string | null ,
     photos:{ small: string | null ,
             large: string },
     status: string ,
     followed: boolean
 
 }
+
+
 
 export interface stateType {
     friends: Array<friendsType>
@@ -46,18 +49,18 @@ export enum ActionType {
 }
 
 
-export const unFollow = (id: string): Action<string> => ({
+export const unFollow = (id: number): Action<number> => ({
     type: ActionType.ON_UNFOLLOW_AC,
     payload: id
 })
 
-export const follow = (id: string): Action<string> => ({
+export const follow = (id: number): Action<number> => ({
     type: ActionType.FOLLOW_AC,
     payload: id
 })
 
 
-export const setFriend = (newFriends: friendsType): Action<friendsType> => ({
+export const setFriend = (newFriends: Array<itemsBackPropsToFriends>): Action<Array<itemsBackPropsToFriends>> => ({
     type: ActionType.SET_FRIEND_AC,
     payload: newFriends
 })

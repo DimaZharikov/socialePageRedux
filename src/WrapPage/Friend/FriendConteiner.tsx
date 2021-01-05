@@ -13,16 +13,16 @@ import FriendsComponent from "./FriendsComponent";
 import {connect} from "react-redux";
 
 import Preloader from "../../common/preloader/Preloader";
-import {FriendsAPI, FriendsPropsTypeAPI} from "../../Store/API/API";
+import {FriendsAPI, FriendsPropsTypeAPI, itemsBackPropsToFriends} from "../../Store/API/API";
 
 
 
 
 interface Props {
-    follow: (id: string) => void,
-    unFollow: (id: string) => void,
-    setFriend: (newFriends: friendsType) => void;
-    friends: Array<friendsType>;
+    follow: (id: number) => void,
+    unFollow: (id: number) => void,
+    setFriend: (newFriends: Array<itemsBackPropsToFriends>) => void;
+    friends: Array<itemsBackPropsToFriends>;
     pageSize: number,
     totalFriendCount: number,
     currentPage: number,
@@ -46,8 +46,10 @@ interface Props {
 
         FriendsAPI.getUsers(this.props.pageSize, this.props.currentPage)
             .then((data) => {
+                debugger
                 this.props.toggleIsFetching(false)
-                this.props.setFriend(data.items)
+                this.props.setFriend(data)
+
             })
 
     }
@@ -57,8 +59,10 @@ interface Props {
         this.props.toggleIsFetching(true)
         FriendsAPI.getUsers(this.props.pageSize, this.props.currentPage)
             .then (data => {
+                debugger
             this.props.toggleIsFetching(false)
-            this.props.setFriend(data.items)
+            this.props.setFriend(data)
+
 
         })
     }
@@ -81,7 +85,7 @@ interface Props {
     }
 }
 
-const mapStateToProps = (state: { friendsPage: { friends: Array<friendsType>, pageSize: number, totalFriendCount: number, currentPage: number, isFetching: boolean } }) => {
+const mapStateToProps = (state: { friendsPage: { friends: Array<itemsBackPropsToFriends>, pageSize: number, totalFriendCount: number, currentPage: number, isFetching: boolean } }) => {
 
     return {
         friends: state.friendsPage.friends,

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {stateType as friendsStateType} from "../FriendsPage.Reducer";
+
 
 
 const instance = axios.create({
@@ -11,22 +11,19 @@ const instance = axios.create({
 })
 
 
-interface itemsBackProps{
-    name: string,
+export interface itemsBackPropsToFriends{
+    followed: boolean,
     id: number,
-    photos: {
-        small: null | string
-        large: null | string
-            }
-    status: null | string
-    followed: boolean
-
+    name: string | null,
+    photos: {small: null | string, large: null | string},
+    status: null | string,
+    uniqueUrlName: null | string,
 }
 
 
 export interface FriendsPropsTypeAPI {
-    items: Array<itemsBackProps>
-    totalCount: number
+    items: Array<itemsBackPropsToFriends>,
+    totalCount: number,
     error: null | string
 }
 

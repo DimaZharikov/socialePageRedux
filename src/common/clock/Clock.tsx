@@ -18,7 +18,7 @@ const ClockComponent: React.FunctionComponent<Props> = () => {
             clearInterval(intervalID)
         }
     }, [])
-    
+
 
     return <div>
         <span>{getDigitsString(date.getHours())}</span>
