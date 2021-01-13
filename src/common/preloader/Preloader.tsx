@@ -4,7 +4,7 @@ interface Props{
 
 }
 
-const Preloader = (props: Props) => {
+const Preloader:React.FC <Props> = (props) => {
     return <div>
         <img src={preloader} alt=""/>
     </div>

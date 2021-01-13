@@ -1,7 +1,6 @@
 import axios from "axios";
 
 
-
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -11,11 +10,11 @@ const instance = axios.create({
 })
 
 
-export interface itemsBackPropsToFriends{
+export interface itemsBackPropsToFriends {
     followed: boolean,
     id: number,
     name: string | null,
-    photos: {small: null | string, large: null | string},
+    photos: { small: null | string, large: null | string },
     status: null | string,
     uniqueUrlName: null | string,
 }
@@ -28,17 +27,23 @@ export interface FriendsPropsTypeAPI {
 }
 
 
-
-
 export const FriendsAPI = {
 
-     getUsers(currentPage: number, pageSize: number) {
+    getUsers(currentPage: number, pageSize: number) {
         return instance.get<FriendsPropsTypeAPI>(`users?page=${currentPage}&count=${pageSize}`,
             {withCredentials: true})
             .then(response => {
                 return response.data.items
             })
-    }
+    },
+    follow(friendsId: number) {
+       return instance.post(`https://social-network.samuraijs.com/api/1.0//follow/${friendsId}`)
+
+
+    },
+    unFollow(friendsId: number) {
+        return  instance.delete(`https://social-network.samuraijs.com/api/1.0//follow/${friendsId}`)
+    },
 
 }
 

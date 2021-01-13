@@ -1,32 +1,39 @@
 import React from 'react'
-import {friendsType} from "../../Store/FriendsPage.Reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {itemsBackPropsToFriends} from "../../Store/API/API";
+
+import { itemsBackPropsToFriends} from "../../Store/API/API";
+
 
 
 interface Props {
-    follow: (id: number) => void,
-    unFollow: (id: number) => void,
-    setFriend: (newFriends: Array<itemsBackPropsToFriends>) => void;
+
+
     friends: Array<itemsBackPropsToFriends>,
     pageSize: number,
     totalFriendCount: number,
     currentPage: number,
     setCurrentPage: (pageNumber: number) => void
     onPageChangeHandler: (pageNumber: number) => void
+    followingInProgress: any
+    toggleFollowingProgress: (followingInProgress: boolean, friendsId: number) => void
+    followThunk: (id: number) => void
+    unfollowThunk: (id: number) => void
 
 }
 
 //setFriends - AC for .get from server searchFriends
 const FriendsComponent: React.FunctionComponent<Props> = React.memo((
     {
-        follow,
-        unFollow,
+
         friends,
         pageSize,
         totalFriendCount,
-        onPageChangeHandler
+        onPageChangeHandler,
+        followingInProgress,
+        followThunk,
+        unfollowThunk
+
+
     }) => {
 
 
@@ -43,7 +50,6 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
                 {
                     pages.map(p => {
                         return (
-
                             <span onClick={() => onPageChangeHandler(p)}>{p}</span>
                         )
                     })
@@ -68,36 +74,14 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
                                     </NavLink>
                                 </div>
                                 {item.followed ?
-                                    <button onClick={() => {
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${item.id}`
-                                            , {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": "5dff25b2-4fe3-496c-985e-2645be233da5"
-                                                }
-                                            })
-                                            .then(response => {
-                                                if (response.data.resultCode === 0) {
-                                                    unFollow(item.id)
-                                                }
-                                            })
+                                    <button  disabled={followingInProgress.some(((id: number) => id === item.id))} onClick={() => {
+                                        followThunk(item.id)
                                     }}>
                                         Followed</button>
 
                                     :
-                                    <button onClick={() => {
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${item.id}`,
-                                            {}, {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": "5dff25b2-4fe3-496c-985e-2645be233da5"
-                                                }
-                                            })
-                                            .then(response => {
-                                                if (response.data.resultCode === 0) {
-                                                    follow(item.id)
-                                                }
-                                            })
+                                    <button  disabled={followingInProgress.some(((id: number) => id === item.id))}  onClick={() => {
+                                        unfollowThunk(item.id)
                                     }}
 
 

@@ -1,34 +1,38 @@
 import React from 'react'
 import {
-    follow,
-    friendsType,
+    follow, followThunk, getFriendsThunk,
+
     setCurrentPage,
-    setFriend,
+    setFriend, toggleFollowingProgress,
     toggleIsFetching,
-    unFollow
+    unFollow, unfollowThunk
 } from "../../Store/FriendsPage.Reducer";
 
-import axios from "axios";
+
 import FriendsComponent from "./FriendsComponent";
 import {connect} from "react-redux";
 
 import Preloader from "../../common/preloader/Preloader";
-import {FriendsAPI, FriendsPropsTypeAPI, itemsBackPropsToFriends} from "../../Store/API/API";
+import {FriendsAPI,  itemsBackPropsToFriends} from "../../Store/API/API";
 
 
 
 
 interface Props {
-    follow: (id: number) => void,
-    unFollow: (id: number) => void,
-    setFriend: (newFriends: Array<itemsBackPropsToFriends>) => void;
-    friends: Array<itemsBackPropsToFriends>;
+
+    friends: Array<itemsBackPropsToFriends>,
     pageSize: number,
     totalFriendCount: number,
     currentPage: number,
-    setCurrentPage: (pageNumber: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-    isFetching: boolean
+    setCurrentPage: (pageNumber: number) => void,
+    toggleIsFetching: (isFetching: boolean) => void,
+    isFetching: boolean,
+    followingInProgress: any,
+    toggleFollowingProgress:( isFetching: boolean, friendsId: number) => void,
+    getFriendsThunk: (pageSize: number,currentPage: number) =>void,
+    followThunk: (id: number) => void
+    unfollowThunk: (id: number) => void
+
 
 
 
@@ -38,73 +42,61 @@ interface Props {
 
  class FriendContainer extends React.Component<Props> {
 
-
-
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-
-
-        FriendsAPI.getUsers(this.props.pageSize, this.props.currentPage)
-            .then((data) => {
-                debugger
-                this.props.toggleIsFetching(false)
-                this.props.setFriend(data)
-
-            })
+        this.props.getFriendsThunk(this.props.pageSize, this.props.currentPage)
 
     }
 
     onPageChangeHandler = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true)
-        FriendsAPI.getUsers(this.props.pageSize, this.props.currentPage)
-            .then (data => {
-                debugger
-            this.props.toggleIsFetching(false)
-            this.props.setFriend(data)
-
-
-        })
+        debugger
+        this.props.getFriendsThunk(this.props.pageSize, pageNumber)
     }
 
     render() {
-        return <>
+        return <React.Fragment>
             {this.props.isFetching ? <Preloader/> : null}
             <FriendsComponent
                 totalFriendCount={this.props.totalFriendCount}
                 pageSize={this.props.pageSize}
                 friends={this.props.friends}
                 currentPage={this.props.currentPage}
-                unFollow={this.props.unFollow}
-                follow={this.props.follow}
-                setFriend={this.props.setFriend}
+
                 setCurrentPage={this.props.setCurrentPage}
                 onPageChangeHandler={this.onPageChangeHandler}
+                followingInProgress = {this.props.followingInProgress}
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
+                followThunk = {this.props.followThunk}
+                unfollowThunk = {this.props.unfollowThunk}
+
             />
-        </>
+        </React.Fragment>
     }
 }
 
-const mapStateToProps = (state: { friendsPage: { friends: Array<itemsBackPropsToFriends>, pageSize: number, totalFriendCount: number, currentPage: number, isFetching: boolean } }) => {
+const mapStateToProps = (state: { friendsPage: { friends: Array<itemsBackPropsToFriends>, pageSize: number,
+        totalFriendCount: number, currentPage: number, isFetching: boolean, followingInProgress: Array<number> } }) => {
 
     return {
         friends: state.friendsPage.friends,
         pageSize: state.friendsPage.pageSize,
         totalFriendCount: state.friendsPage.totalFriendCount,
         currentPage: state.friendsPage.currentPage,
-        isFetching: state.friendsPage.isFetching
+        isFetching: state.friendsPage.isFetching,
+        followingInProgress: state.friendsPage.followingInProgress
     }
 }
 
 
 
-
 export default connect(mapStateToProps, {
-    follow,
-    unFollow,
-    setFriend,
+
     setCurrentPage,
-    toggleIsFetching
+    toggleIsFetching,
+    toggleFollowingProgress,
+    getFriendsThunk,
+    followThunk,
+    unfollowThunk
+
 
 })(FriendContainer)
 
