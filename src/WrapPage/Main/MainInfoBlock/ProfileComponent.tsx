@@ -3,10 +3,11 @@ import {profileType} from "../../../Store/Profile.Reducer";
 
 interface Props{
     profile: profileType
-    onSetUserProfile: (profile: profileType)=> void
+    getUserProfile: (userId: string)=> void
+
 }
 
- const ProfileComponent: React.FunctionComponent<Props> = React.memo (({profile,onSetUserProfile}) => {
+ const ProfileComponent: React.FunctionComponent<Props> = React.memo (({profile,getUserProfile}) => {
     return(<div key = {profile.userId}>
         <div> Name : {profile.fullName}</div>
         <img src={profile.photos.large} alt=""/>

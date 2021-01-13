@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {ProfileAPI} from "./API/API";
 
 export type profileType = {
     "aboutMe": string,
@@ -61,7 +63,7 @@ let ininitaialState: StateProps = {
         lookingForAJob: true,
         lookingForAJobDescription: false,
         fullName: 'Dmitriy Zharikov',
-        userId: v1() ,
+        userId: '1' ,
         photos: {
             small: 'https://vk.com/zharikov_d_n?z=photo202353636_457239931%2Falbum202353636_0%2Frev',
             large: 'https://sun9-58.userapi.com/impf/c855220/v855220867/b2242/wUwnR4i_HII.jpg?size=810x1080&quality=96&sign=065f3587fc85d86539273319b7af1f47&type=album'
@@ -135,12 +137,23 @@ export const setItemPostAC = (NewPosts: ItemPostType): Action<ItemPostType>=> ({
     payload: NewPosts
 })
 
+
 //settingsActionCreater
 
 export const toggleIsFetching = (isFetching: boolean): Action<boolean> =>  ( {
     type: ActionType.TOGGLE_IS_FETCHING,
     payload: isFetching
 })
+
+
+export const getUserProfile = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        ProfileAPI.getProfile(userId)
+            .then(response => {
+                dispatch (setUserProfile(response.data))
+            })
+    }
+}
 
 const profilePageReducer = (state = ininitaialState, action: Action<ActionType>) => {
 

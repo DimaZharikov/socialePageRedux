@@ -1,11 +1,9 @@
 import React from 'react'
 import {
-    follow, followThunk, getFriendsThunk,
-
+    followThunk, getFriendsThunk,
     setCurrentPage,
-    setFriend, toggleFollowingProgress,
-    toggleIsFetching,
-    unFollow, unfollowThunk
+    toggleFollowingProgress,
+    toggleIsFetching, unfollowThunk
 } from "../../Store/FriendsPage.Reducer";
 
 
@@ -13,9 +11,7 @@ import FriendsComponent from "./FriendsComponent";
 import {connect} from "react-redux";
 
 import Preloader from "../../common/preloader/Preloader";
-import {FriendsAPI,  itemsBackPropsToFriends} from "../../Store/API/API";
-
-
+import {itemsBackPropsToFriends} from "../../Store/API/API";
 
 
 interface Props {
@@ -28,19 +24,15 @@ interface Props {
     toggleIsFetching: (isFetching: boolean) => void,
     isFetching: boolean,
     followingInProgress: any,
-    toggleFollowingProgress:( isFetching: boolean, friendsId: number) => void,
-    getFriendsThunk: (pageSize: number,currentPage: number) =>void,
+    toggleFollowingProgress: (isFetching: boolean, friendsId: number) => void,
+    getFriendsThunk: (pageSize: number, currentPage: number) => void,
     followThunk: (id: number) => void
     unfollowThunk: (id: number) => void
 
 
-
-
-
-
 }
 
- class FriendContainer extends React.Component<Props> {
+class FriendContainer extends React.Component<Props> {
 
     componentDidMount() {
         this.props.getFriendsThunk(this.props.pageSize, this.props.currentPage)
@@ -63,18 +55,22 @@ interface Props {
 
                 setCurrentPage={this.props.setCurrentPage}
                 onPageChangeHandler={this.onPageChangeHandler}
-                followingInProgress = {this.props.followingInProgress}
+                followingInProgress={this.props.followingInProgress}
                 toggleFollowingProgress={this.props.toggleFollowingProgress}
-                followThunk = {this.props.followThunk}
-                unfollowThunk = {this.props.unfollowThunk}
+                followThunk={this.props.followThunk}
+                unfollowThunk={this.props.unfollowThunk}
 
             />
         </React.Fragment>
     }
 }
 
-const mapStateToProps = (state: { friendsPage: { friends: Array<itemsBackPropsToFriends>, pageSize: number,
-        totalFriendCount: number, currentPage: number, isFetching: boolean, followingInProgress: Array<number> } }) => {
+const mapStateToProps = (state: {
+    friendsPage: {
+        friends: Array<itemsBackPropsToFriends>, pageSize: number,
+        totalFriendCount: number, currentPage: number, isFetching: boolean, followingInProgress: Array<number>
+    }
+}) => {
 
     return {
         friends: state.friendsPage.friends,
@@ -85,7 +81,6 @@ const mapStateToProps = (state: { friendsPage: { friends: Array<itemsBackPropsTo
         followingInProgress: state.friendsPage.followingInProgress
     }
 }
-
 
 
 export default connect(mapStateToProps, {
