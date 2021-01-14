@@ -12,6 +12,9 @@ import {connect} from "react-redux";
 
 import Preloader from "../../common/preloader/Preloader";
 import {itemsBackPropsToFriends} from "../../Store/API/API";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../common/withAuthRedirect/WithAuthRedirect";
+
 
 
 interface Props {
@@ -40,7 +43,6 @@ class FriendContainer extends React.Component<Props> {
     }
 
     onPageChangeHandler = (pageNumber: number) => {
-        debugger
         this.props.getFriendsThunk(this.props.pageSize, pageNumber)
     }
 
@@ -70,6 +72,7 @@ const mapStateToProps = (state: {
         friends: Array<itemsBackPropsToFriends>, pageSize: number,
         totalFriendCount: number, currentPage: number, isFetching: boolean, followingInProgress: Array<number>
     }
+
 }) => {
 
     return {

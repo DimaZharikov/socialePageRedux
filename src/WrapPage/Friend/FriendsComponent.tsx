@@ -1,12 +1,11 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
-
-import { itemsBackPropsToFriends} from "../../Store/API/API";
-
-
+import {NavLink, Redirect} from "react-router-dom";
+import {itemsBackPropsToFriends} from "../../Store/API/API";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../Store/Store";
+import {stateProps as authProps} from "../../Store/Auth.Reducer";
 
 interface Props {
-
 
     friends: Array<itemsBackPropsToFriends>,
     pageSize: number,
@@ -31,11 +30,13 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
         onPageChangeHandler,
         followingInProgress,
         followThunk,
-        unfollowThunk
-
+        unfollowThunk,
 
     }) => {
 
+
+    const auth = useSelector<AppRootStateType,authProps>(state => state.authentication);
+    if (!auth.isAuth) return <Redirect  to = {'/logIn'} />
 
     const pageCount = Math.ceil(totalFriendCount / pageSize)
     const pages = [];
@@ -68,21 +69,24 @@ const FriendsComponent: React.FunctionComponent<Props> = React.memo((
                                             alt=""/>
                                         {item.status ?
                                             <img
-                                                src="https://img.icons8.com/color/12/000000/connection-status-on--v1.png" alt={'pictures'}/>
+                                                src="https://img.icons8.com/color/12/000000/connection-status-on--v1.png"
+                                                alt={'pictures'}/>
                                             : ''
                                         }
                                     </NavLink>
                                 </div>
                                 {item.followed ?
-                                    <button  disabled={followingInProgress.some(((id: number) => id === item.id))} onClick={() => {
-                                        followThunk(item.id)
-                                    }}>
+                                    <button disabled={followingInProgress.some(((id: number) => id === item.id))}
+                                            onClick={() => {
+                                                followThunk(item.id)
+                                            }}>
                                         Followed</button>
 
                                     :
-                                    <button  disabled={followingInProgress.some(((id: number) => id === item.id))}  onClick={() => {
-                                        unfollowThunk(item.id)
-                                    }}
+                                    <button disabled={followingInProgress.some(((id: number) => id === item.id))}
+                                            onClick={() => {
+                                                unfollowThunk(item.id)
+                                            }}
 
 
                                     >Unfollowed</button>

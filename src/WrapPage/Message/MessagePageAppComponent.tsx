@@ -1,17 +1,24 @@
 import React from 'react'
 import SearchFriendsConteiner from "./Components/SerchFriend/SearchFriendsConteiner";
 import MessageItemsConteiner from "./Components/MessageItems/MessageItemsConteiner";
+import {withAuthRedirect} from "../../common/withAuthRedirect/WithAuthRedirect";
+import {compose} from "redux";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../Store/Store";
+import {stateProps as authProps} from "../../Store/Auth.Reducer";
+import {Redirect} from "react-router-dom";
 
 
-interface Props {
 
-}
+const MessagePageAppComponent:React.FunctionComponent = () => {
 
-const MessagePageAppComponent = (props: Props) => {
-    return <>
+    const auth = useSelector<AppRootStateType,authProps>(state => state.authentication);
+    if (!auth.isAuth) return <Redirect  to = {'/logIn'} />
+
+    return <React.Fragment>
         <SearchFriendsConteiner/>
         <MessageItemsConteiner/>
-    </>
+    </React.Fragment>
 }
 
 

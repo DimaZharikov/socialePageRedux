@@ -1,5 +1,4 @@
-import {Dispatch} from "redux";
-import {AuthAPI} from "./API/API";
+
 
 interface dataProps {
     id: number | null,
@@ -41,6 +40,8 @@ export const setAuthUserDate = (data : dataProps) : Action<dataProps> => ({
     payload: data
 })
 
+
+//thunk
 // export const getAuthUserDate = () => {
 //     return (dispatch: Dispatch) => {
 //         AuthAPI.authenticator(). then (response => {

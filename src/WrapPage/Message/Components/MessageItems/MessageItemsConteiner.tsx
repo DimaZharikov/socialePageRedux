@@ -5,9 +5,11 @@ import {messageItemType, onRemoveDialogueItemsAC, setMessageItemsAC} from "../..
 import {Dispatch} from "redux";
 
 
-const mapStateToProps = (state: {messagePage: {messageItems: Array<messageItemType>}}) => {
+
+
+const mapStateToProps = (state: {messagePage: {messageItems: Array<messageItemType>}}, ) => {
     return{
-        messageItems: state.messagePage.messageItems
+        messageItems: state.messagePage.messageItems,
     }
 }
 

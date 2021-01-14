@@ -1,7 +1,6 @@
-import React, {FunctionComponent, useCallback, useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {ChangeFilterType, messageItemType} from "../../../../Store/MessagePage.Reducer";
 import {NavLink} from "react-router-dom";
-
 import {IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 
@@ -12,6 +11,7 @@ interface props {
     messageItems: Array<messageItemType>,
     onRemoveDialogueItemsAC: (id: string) => void,
     setMessage: (messageItems: Array<messageItemType>) => void
+
 }
 
 const MessageItemsComponent: React.FunctionComponent<props> = React.memo((props) => {
@@ -19,6 +19,8 @@ const MessageItemsComponent: React.FunctionComponent<props> = React.memo((props)
 // ChangeFiler --
     const [messages, setMessages] = useState<messageItemType[]>(props.messageItems);
     const [filter, setFilter]= useState<ChangeFilterType>('All');
+
+
 
 
         let filteredMessage = props.messageItems
