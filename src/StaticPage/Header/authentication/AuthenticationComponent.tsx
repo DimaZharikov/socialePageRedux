@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../Store/Store";
-import {setAuthUserDate, stateProps} from "../../../Store/Auth.Reducer";
+import {getAuthUserDate, setAuthUserDate, stateProps} from "../../../Store/Auth.Reducer";
 import {AuthAPI} from "../../../Store/API/API";
 
 
@@ -13,14 +13,7 @@ const AuthenticationComponent: React.FC  = () => {
     const dispatch = useDispatch();
 
     useEffect(()=> {
-
-        AuthAPI.authenticator()
-            .then(response => {
-                if (response.data.resultCode === 0){
-                    const {data: {id, email, login}} = response.data
-                    dispatch(setAuthUserDate({id, email, login}))
-                }
-            })
+        dispatch (getAuthUserDate())
     },[dispatch])
 
     return <div>

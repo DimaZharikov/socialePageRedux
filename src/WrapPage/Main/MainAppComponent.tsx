@@ -8,8 +8,6 @@ import {Redirect} from "react-router-dom";
 
 
 
-
-
 interface Props {
 
 }
@@ -17,19 +15,18 @@ interface Props {
 
 const MainPageConteiner: React.FunctionComponent<Props> = (props) => {
 
-    const auth = useSelector<AppRootStateType,authProps>(state => state.authentication);
-    if (!auth.isAuth) return <Redirect  to = {'/logIn'} />
+    const auth = useSelector<AppRootStateType, authProps>(state => state.authentication);
+    if (!auth.isAuth) return <Redirect to={'/logIn'}/>
 
 
-    return(
+    return (
         <div>
-        <ProfileContainer />
-        <PostWallConteiner />
-    </div>
+            <ProfileContainer/>
+            <PostWallConteiner/>
+        </div>
 
     )
 }
-
 
 
 export default MainPageConteiner
