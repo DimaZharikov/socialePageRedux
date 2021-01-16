@@ -5,13 +5,14 @@ import profilePageReducer from "./Profile.Reducer";
 import AuthReducer from "./Auth.Reducer";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
-
+import {reducer as formReducer} from 'redux-form';
 
 const reducer = combineReducers({
     authentication: AuthReducer,
     profilePage: profilePageReducer,
     friendsPage: friendsReducer,
-    messagePage: messagePageReducer
+    messagePage: messagePageReducer,
+    form: formReducer
 
 })
 

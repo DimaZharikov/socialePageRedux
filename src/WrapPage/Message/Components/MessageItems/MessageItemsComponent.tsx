@@ -71,7 +71,7 @@ const MessageItemsComponent: React.FunctionComponent<props> = React.memo((props)
                                </div>
                            </div>
                            <div>
-                               <NavLink exact to={`/WrapMessage${item.id}`}><p>{item.message}</p></NavLink>
+                               <NavLink exact to={`/dialogue/${item.id}`}><p>{item.message}</p></NavLink>
                            </div>
                        </div>
 

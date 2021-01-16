@@ -35,10 +35,6 @@ const initialState: stateType = {
 }
 
 
-interface Action<T> {
-    type: ActionType,
-    payload: T
-}
 
 
 export enum ActionType {
@@ -49,6 +45,10 @@ export enum ActionType {
     TOGGLE_IS_FETCHING = 'TOGGLIE_IS_FETCHING',
     TOGGlE_IN_FOLLOWING_PROGRESS = 'TOGGlE_IN_FOLLOWING_PROGRESS'
 
+}
+interface Action<T> {
+    type: ActionType,
+    payload: T
 }
 
 
@@ -110,15 +110,15 @@ export const followThunk = (id: number) => {
     }
 }
 
- export const unfollowThunk = (firendsId: number) => {
+ export const unfollowThunk = (friendsId: number) => {
     return (dispatch: Dispatch) => {
-        dispatch(toggleFollowingProgress(true, firendsId))
-        FriendsAPI.follow(firendsId)
+        dispatch(toggleFollowingProgress(true, friendsId))
+        FriendsAPI.follow(friendsId)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    dispatch(follow(firendsId))
+                    dispatch(follow(friendsId))
                 }
-                dispatch(toggleFollowingProgress(false, firendsId))
+                dispatch(toggleFollowingProgress(false, friendsId))
             })
     }
 };
@@ -126,6 +126,7 @@ export const followThunk = (id: number) => {
 
 const friendsReducer = (state = initialState, action: Action<any>): stateType => {
     switch (action.type) {
+
         case ActionType.ON_UNFOLLOW_AC:
             return {
                 ...state,

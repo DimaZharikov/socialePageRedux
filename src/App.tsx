@@ -6,7 +6,10 @@ import MainPageConteiner from "./WrapPage/Main/MainAppComponent";
 import {BrowserRouter, Route} from "react-router-dom";
 import FriendContainer from "./WrapPage/Friend/FriendConteiner";
 import HeaderAppComponent from "./StaticPage/Header/HeaderAppComponent";
-import LogInPageComponent from "./StaticPage/Header/login/LogInComponent";
+
+
+import  DialogueContainerForm from "./WrapPage/Message/Components/Dialogue/DialogueComponent";
+import LogInFormContainer from "./StaticPage/Header/login/LogInFormContainer";
 
 
 
@@ -27,9 +30,13 @@ function App() {
                 <Route exact path='/friends' render= {()=> <FriendContainer /> }/>
 
                 <Route exact path='/Message' component = {MessagePageAppComponent}  />
+                {/*Path to private dialogue from MessagePage/Container */}
+                <Route path='/dialogue/:userId?'  render ={()=><DialogueContainerForm/>} />
+
+
 
                 {/*redirect*/}
-                <Route path='/logIn'  render ={()=><LogInPageComponent/>} />
+                <Route path='/logIn'  render ={()=><LogInFormContainer/>} />
             </div>
 
         </BrowserRouter>

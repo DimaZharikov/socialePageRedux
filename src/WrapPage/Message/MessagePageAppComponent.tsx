@@ -1,8 +1,7 @@
 import React from 'react'
 import SearchFriendsConteiner from "./Components/SerchFriend/SearchFriendsConteiner";
 import MessageItemsConteiner from "./Components/MessageItems/MessageItemsConteiner";
-import {withAuthRedirect} from "../../common/withAuthRedirect/WithAuthRedirect";
-import {compose} from "redux";
+
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../Store/Store";
 import {stateProps as authProps} from "../../Store/Auth.Reducer";
