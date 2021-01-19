@@ -16,9 +16,9 @@ export type formDataType = {
 
 }
 export type IPropsType = {
-    auth: boolean
-    getAuthUserDate: (formData: formDataType) => void
-    logInThunk:(email: string, password: string, rememberMe: boolean) => void
+    auth: boolean,
+    getAuthUserDate: (formData: formDataType) => void,
+    logInThunk:(email: string, password: string, rememberMe: boolean) => void,
     logOutThunk: () => void,
 
 

@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {AuthAPI} from "../../API/API";
 import {ThunkAction} from "redux-thunk";
-import {stopSubmit} from "redux-form";
+import {stopSubmit, FormAction} from "redux-form";
 import {AppRootStateType} from "../../Store";
 
 
@@ -9,10 +9,6 @@ interface dataProps {
     id: string | null,
     email: string | null,
     login: string | null,
-    isAuth: boolean,
-
-
-
 
 }
 
@@ -20,8 +16,7 @@ export interface stateProps {
     data: dataProps
     isAuth: boolean
     isFetching: boolean
-
-}
+   }
 
 
 
@@ -30,17 +25,16 @@ const initialeState: stateProps = {
         id: null,
         email: null,
         login: null,
-        isAuth: false,
 
     },
     isAuth: false,
     isFetching: false,
-
 }
 
 
 export enum ActionType {
     SET_USERS_DATE = "SET-USER-DATE",
+
 
 }
 
@@ -50,25 +44,22 @@ interface Action<T> {
 
 }
 
-export const setAuthUserDate = (data: dataProps) : Action<dataProps> => ({
+type setAuthUserDateType = ReturnType<typeof setAuthUserDate>
+
+export const setAuthUserDate = (data:dataProps, isAuth: boolean ) : Action<{data:dataProps, isAuth: boolean }> => ({
     type: ActionType.SET_USERS_DATE,
-    payload:  data
+    payload:  {data,isAuth}
 })
 
 
 
-
-
-
-
 //thunk
-export const getAuthUserDate = () => {
+export const getAuthUserDate = (): ThunkAction<void, AppRootStateType, unknown, setAuthUserDateType> => {
     return (dispatch: Dispatch) => {
          return AuthAPI.authenticator(). then (response => {
             if (response.data.resultCode === 0) {
-                const {data: {id, email, login} } = response.data
-                dispatch(setAuthUserDate({id, email, login, isAuth: true} ))
-
+                const {data: {id, email, login}  } = response.data
+                dispatch(setAuthUserDate({id, email, login}, true ))
             }
         })
     }
@@ -76,7 +67,7 @@ export const getAuthUserDate = () => {
 
 
 
-export const logInThunk =   (email: string, password: string, rememberMe: boolean = false):  ThunkAction<void, AppRootStateType, unknown, any> =>
+export const logInThunk =   (email: string, password: string, rememberMe: boolean = false): ThunkAction<void, AppRootStateType, unknown, FormAction > =>
 (dispatch ) => {
 
         AuthAPI.login(email, password, rememberMe)
@@ -84,41 +75,41 @@ export const logInThunk =   (email: string, password: string, rememberMe: boolea
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserDate())
             } else {
-                let messageError = response.data.messages.length > 0 ? response.data.messages[0] : 'someError'
+                let messageError = response.data.messages.length != 0 ? response.data.messages[0] : 'someError'
 
                 dispatch (stopSubmit('login', {_error: messageError}))
+
             }
         })
 
 }
 
 
-export const logOutThunk = () => {
-        return (dispatch: Dispatch) => {
+export const logOutThunk = () :  ThunkAction<void, AppRootStateType, unknown, setAuthUserDateType> => {
+        return (dispatch) => {
         AuthAPI.logOut(). then ((response) => {
             if (response.data.resultCode === 0) {
-                dispatch(setAuthUserDate({login: null,email: null,id:null, isAuth: false}))
-
+                dispatch(setAuthUserDate({login: null,email: null,id:null}, false))
             }
         })
     }
 }
 
 
-const AuthReducer = (state = initialeState, action: Action<dataProps>) => {
+const AuthReducer = (state = initialeState, action: Action<any>) => {
     switch (action.type) {
         case ActionType.SET_USERS_DATE:
             return {
                 ...state,
-                data: action.payload,
-                isAuth: true
+                data: action.payload.data,
+                isAuth: action.payload.isAuth
+
             }
+
 
     }
     return state
 }
-
-
 
 
 export default AuthReducer

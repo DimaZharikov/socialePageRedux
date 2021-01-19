@@ -28,6 +28,7 @@ interface Action<T> {
 
 
 //ActionCreator
+type setInitializerSucceedProps = ReturnType<typeof setInitializerSucceed>
 export const setInitializerSucceed = () => ({
     type: ActionType.SET_INITIALIZED,
 
@@ -37,7 +38,7 @@ export const setInitializerSucceed = () => ({
 
 //ThunkCreator
 
-export const initializerApp = (): ThunkAction<void, AppRootStateType, unknown, any> => (dispatch) => {
+export const initializerApp = (): ThunkAction<void, AppRootStateType, unknown, setInitializerSucceedProps> => (dispatch) => {
     const promise = dispatch(getAuthUserDate())
 
 

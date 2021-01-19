@@ -3,14 +3,13 @@ import React from 'react';
 import Navigation from "./StaticPage/Navigation/Navigation";
 import MessagePageAppComponent from "./WrapPage/Message/MessagePageAppComponent";
 import MainPageConteiner from "./WrapPage/Main/MainAppComponent";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import FriendContainer from "./WrapPage/Friend/FriendConteiner";
 import HeaderAppComponent from "./StaticPage/Header/HeaderAppComponent";
 import {DialoguePageContainer} from "./WrapPage/Message/Components/Dialogue/DialogueAppContainer";
 import LogInFormContainer from "./StaticPage/Header/login/LogInFormContainer";
 import Preloader from "./common/preloader/Preloader";
 import {AppRootStateType} from "./Store/Store";
-import {compose} from "redux";
 import {connect} from "react-redux";
 import {initializerApp} from "./Store/Reducer with Include Selector/App/App.Reducer";
 
@@ -67,9 +66,7 @@ const mapStateToProps = (state: AppRootStateType) => ({
 
 
 
-export default compose (
-    withRouter,
-    connect (mapStateToProps,{initializerApp}))  (App)
+export default connect (mapStateToProps,{initializerApp}) (App) as React.ComponentType
 
 
 

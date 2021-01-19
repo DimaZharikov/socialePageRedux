@@ -84,6 +84,17 @@ const mapStateToProps = (state: {
     }
 }
 
+//
+// const mapStateToProps = (state: AppRootStateType) => {
+//     return {
+//         friends : selectFriend(state),
+//         pageSize: selectPageSize(state),
+//         totalFriendCount:  selectTotalFriendCount(state),
+//         currentPage: selectCurrentPage(state),
+//         IsFetching: selectIsFetching(state),
+//         followingInProgress: selectFollowingInProgress(state)
+//     }
+// }
 
 
 

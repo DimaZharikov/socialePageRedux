@@ -7,7 +7,7 @@ import {getAuthUserDate, logInThunk, logOutThunk} from "../../../Store/Reducer w
 
 
 const mapStateToProps = (state: AppRootStateType) => ({
-    auth: state.authentication.isAuth,
+    auth: state.authentication.isAuth
 })
 
 export default connect(mapStateToProps, {
