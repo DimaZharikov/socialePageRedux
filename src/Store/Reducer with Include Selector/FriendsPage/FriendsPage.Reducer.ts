@@ -1,4 +1,4 @@
-import {FriendsAPI, itemsBackPropsToFriends} from "./API/API";
+import {FriendsAPI, itemsBackPropsToFriends} from "../../API/API";
 import {Dispatch} from "redux";
 
 export interface friendsType {
@@ -86,10 +86,11 @@ export const toggleFollowingProgress = (isFetching: boolean, friendsId: number):
 
 
 //thunk
-export const getFriendsThunk = (currentPage: number, pageSize: number) => {
+export const getFriendsThunk = (page: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
-        FriendsAPI.getUsers(pageSize, currentPage)
+        dispatch (setCurrentPage(page))
+        FriendsAPI.getUsers(pageSize, page)
             .then((data) => {
                 dispatch(toggleIsFetching(false))
                 dispatch(setFriend(data))

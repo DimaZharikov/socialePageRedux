@@ -1,10 +1,12 @@
 import React from 'react'
 import {
-    followThunk, getFriendsThunk,
+    followThunk,
+    getFriendsThunk,
     setCurrentPage,
     toggleFollowingProgress,
-    toggleIsFetching, unfollowThunk
-} from "../../Store/FriendsPage.Reducer";
+    toggleIsFetching,
+    unfollowThunk
+} from "../../Store/Reducer with Include Selector/FriendsPage/FriendsPage.Reducer";
 
 
 import FriendsComponent from "./FriendsComponent";
@@ -12,9 +14,6 @@ import {connect} from "react-redux";
 
 import Preloader from "../../common/preloader/Preloader";
 import {itemsBackPropsToFriends} from "../../Store/API/API";
-import {compose} from "redux";
-import {withAuthRedirect} from "../../common/withAuthRedirect/WithAuthRedirect";
-
 
 
 interface Props {

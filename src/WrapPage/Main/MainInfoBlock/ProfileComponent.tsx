@@ -1,5 +1,5 @@
 import React from 'react'
-import {profileType} from "../../../Store/Profile.Reducer";
+import {profileType} from "../../../Store/Reducer with Include Selector/ProfilePage/Profile.Reducer";
 import ProfileStatusComponent from "../MainInputStatus/ProfileStatusComponent";
 
 interface Props{

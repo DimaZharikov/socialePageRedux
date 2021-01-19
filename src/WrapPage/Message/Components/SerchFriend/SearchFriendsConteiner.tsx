@@ -6,7 +6,7 @@ import {
     onSearchFriendsAC,
     searchFriendType,
     setSearchFriendsAC
-} from "../../../../Store/MessagePage.Reducer";
+} from "../../../../Store/Reducer with Include Selector/MessagePage/MessagePage.Reducer";
 import {Dispatch} from "redux";
 
 const mapStateToProps = (state: {messagePage: {searchFriends: Array<searchFriendType> }, searchInput: string}) => {

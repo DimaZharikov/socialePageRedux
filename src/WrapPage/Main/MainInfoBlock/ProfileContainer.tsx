@@ -1,4 +1,4 @@
-import {getStatus, getUserProfile, profileType, updateStatus,} from "../../../Store/Profile.Reducer";
+import {getStatus, getUserProfile, profileType, updateStatus,} from "../../../Store/Reducer with Include Selector/ProfilePage/Profile.Reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 import {connect} from "react-redux";
@@ -15,6 +15,7 @@ interface Props {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
     updateStatus: (status: string)=> void
+    userId: string | null
 
 }
 
@@ -23,7 +24,8 @@ interface Props {
 const mapStateToProps = (state: { profilePage: { status: string ,profile: profileType } }) => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+
     }
 }
 
@@ -31,9 +33,13 @@ const mapStateToProps = (state: { profilePage: { status: string ,profile: profil
 class ProfileConteiner extends React.Component<RouterPropsType> {
 
     componentDidMount() {
+
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '13058';
+            userId = `${this.props.userId}`
+            if (!userId) {
+                this.props.history.push('/login')
+            }
         }
 
         this.props.getUserProfile(userId)

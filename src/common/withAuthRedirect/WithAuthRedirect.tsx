@@ -1,6 +1,6 @@
 import {Redirect} from "react-router-dom";
 import React from "react";
-import {stateProps as authProps} from "../../Store/Auth.Reducer";
+import {stateProps as authProps} from "../../Store/Reducer with Include Selector/AuthRedirectWithHaederPage/Auth.Reducer";
 
 
 interface Props {

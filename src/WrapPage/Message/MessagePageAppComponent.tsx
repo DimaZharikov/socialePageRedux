@@ -4,7 +4,7 @@ import MessageItemsConteiner from "./Components/MessageItems/MessageItemsContein
 
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../Store/Store";
-import {stateProps as authProps} from "../../Store/Auth.Reducer";
+import {stateProps as authProps} from "../../Store/Reducer with Include Selector/AuthRedirectWithHaederPage/Auth.Reducer";
 import {Redirect} from "react-router-dom";
 
 

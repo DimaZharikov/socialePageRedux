@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useCallback, useState} from "react"
-import {ItemPostType} from "../../../Store/Profile.Reducer";
+import {ItemPostType} from "../../../Store/Reducer with Include Selector/ProfilePage/Profile.Reducer";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";

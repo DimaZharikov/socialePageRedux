@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ChangeFilterType, messageItemType} from "../../../../Store/MessagePage.Reducer";
+import {ChangeFilterType, messageItemType} from "../../../../Store/Reducer with Include Selector/MessagePage/MessagePage.Reducer";
 import {NavLink} from "react-router-dom";
 import {IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";

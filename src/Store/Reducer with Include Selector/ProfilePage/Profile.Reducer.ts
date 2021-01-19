@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {ProfileAPI} from "./API/API";
+import {ProfileAPI} from "../../API/API";
 
 export type profileType = {
     "aboutMe": string,
@@ -17,7 +17,7 @@ export type profileType = {
     "lookingForAJob": boolean,
     "lookingForAJobDescription": boolean,
     "fullName": string,
-    "userId": string,
+    "userId": number | null,
     "photos": {
         "small": string,
         "large": string
@@ -65,7 +65,7 @@ let ininitaialState: StateProps = {
         lookingForAJob: true,
         lookingForAJobDescription: false,
         fullName: 'Dmitriy Zharikov',
-        userId: '1',
+        userId: 13058,
         photos: {
             small: 'https://vk.com/zharikov_d_n?z=photo202353636_457239931%2Falbum202353636_0%2Frev',
             large: 'https://sun9-58.userapi.com/impf/c855220/v855220867/b2242/wUwnR4i_HII.jpg?size=810x1080&quality=96&sign=065f3587fc85d86539273319b7af1f47&type=album'

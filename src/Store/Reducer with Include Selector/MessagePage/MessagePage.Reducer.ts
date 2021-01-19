@@ -23,6 +23,8 @@ export interface messageItemType {
 }
 
 
+
+
 export interface messagePageType {
 
     searchFriends: Array<searchFriendType>,
@@ -112,6 +114,8 @@ export enum ActionType {
 
     SET_MESSAGE_ITEMS_AC = "SET-MESSAGE-ITEMS-AC",
     ON_REMOVE_DIALOGUE_ITEMS = "REMOVE-DIALOG-ITEMS",
+
+
 
 }
 

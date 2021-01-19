@@ -3,7 +3,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import {itemsBackPropsToFriends} from "../../Store/API/API";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../Store/Store";
-import {stateProps as authProps} from "../../Store/Auth.Reducer";
+import {stateProps as authProps} from "../../Store/Reducer with Include Selector/AuthRedirectWithHaederPage/Auth.Reducer";
 
 interface Props {
 

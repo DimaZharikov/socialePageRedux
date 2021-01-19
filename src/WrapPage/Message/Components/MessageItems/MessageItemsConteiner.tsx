@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
 import MessageItemsComponent from "./MessageItemsComponent";
-import {messageItemType, onRemoveDialogueItemsAC, setMessageItemsAC} from "../../../../Store/MessagePage.Reducer";
+import {messageItemType, onRemoveDialogueItemsAC, setMessageItemsAC} from "../../../../Store/Reducer with Include Selector/MessagePage/MessagePage.Reducer";
 import {Dispatch} from "redux";
 
 

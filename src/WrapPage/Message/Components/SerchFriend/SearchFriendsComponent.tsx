@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useCallback, useState} from 'react'
-import {searchFriendType} from "../../../../Store/MessagePage.Reducer";
+import {searchFriendType} from "../../../../Store/Reducer with Include Selector/MessagePage/MessagePage.Reducer";
 import {TextField} from "@material-ui/core";
 
 

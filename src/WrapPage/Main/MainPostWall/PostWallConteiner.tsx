@@ -5,7 +5,7 @@ import {
     onAddNewPostHandler,
     onChangeTextPost,
     onRemovePostCreater, setItemPostAC,
-} from "../../../Store/Profile.Reducer";
+} from "../../../Store/Reducer with Include Selector/ProfilePage/Profile.Reducer";
 import PostWallComponent from "./PostWallComponent";
 import {Dispatch} from "redux";
 
