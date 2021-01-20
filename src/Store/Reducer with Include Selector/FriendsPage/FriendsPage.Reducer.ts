@@ -1,5 +1,6 @@
 import {FriendsAPI, itemsBackPropsToFriends} from "../../API/API";
 import {Dispatch} from "redux";
+import {setAuthUserDate} from "../AuthRedirectWithHaederPage/Auth.Reducer";
 
 export interface friendsType {
     name: string,
@@ -35,17 +36,17 @@ const initialState: stateType = {
 }
 
 
-
-
+// enum string configuration: namePages/{name of component}/actionType
 export enum ActionType {
-    ON_UNFOLLOW_AC = "ON-UNFOLLOW-AC",
-    FOLLOW_AC = 'FOLLOW-AC',
-    SET_FRIEND_AC = 'SET-FRIEND-AC',
-    SET_CURRENT_PAGE = 'SET-CURRENT-PAGE',
-    TOGGLE_IS_FETCHING = 'TOGGLIE_IS_FETCHING',
-    TOGGlE_IN_FOLLOWING_PROGRESS = 'TOGGlE_IN_FOLLOWING_PROGRESS'
+    ON_UNFOLLOW_AC = "friendsPage/{FriendsComponent}/ON-UNFOLLOW-AC",
+    ON_FOLLOW_AC = 'friendsPage/{FriendsComponent}/FOLLOW-AC',
+    SET_FRIEND_AC = 'friendsPage/{FriendsComponent}/SET-FRIEND-AC',
+    SET_CURRENT_PAGE = 'friendsPage/{FriendsComponent}/SET-CURRENT-PAGE',
+    TOGGLE_IS_FETCHING = 'friendsPage/{GlobalConfiguration}/TOGGLIE_IS_FETCHING',
+    TOGGlE_IN_FOLLOWING_PROGRESS = 'friendsPage/{FriendsComponent}/TOGGlE_IN_FOLLOWING_PROGRESS'
 
 }
+
 interface Action<T> {
     type: ActionType,
     payload: T
@@ -57,8 +58,9 @@ export const unFollow = (id: number): Action<number> => ({
     payload: id
 });
 
+
 export const follow = (id: number): Action<number> => ({
-    type: ActionType.FOLLOW_AC,
+    type: ActionType.ON_FOLLOW_AC,
     payload: id
 });
 
@@ -68,10 +70,12 @@ export const setFriend = (newFriends: Array<itemsBackPropsToFriends>): Action<Ar
     payload: newFriends
 });
 
+
 export const setCurrentPage = (currentPage: number): Action<number> => ({
     type: ActionType.SET_CURRENT_PAGE,
     payload: currentPage
 });
+
 
 export const toggleIsFetching = (isFetching: boolean): Action<boolean> => ({
     type: ActionType.TOGGLE_IS_FETCHING,
@@ -89,7 +93,7 @@ export const toggleFollowingProgress = (isFetching: boolean, friendsId: number):
 export const getFriendsThunk = (page: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
-        dispatch (setCurrentPage(page))
+        dispatch(setCurrentPage(page))
         FriendsAPI.getUsers(pageSize, page)
             .then((data) => {
                 dispatch(toggleIsFetching(false))
@@ -98,31 +102,31 @@ export const getFriendsThunk = (page: number, pageSize: number) => {
     }
 };
 
+//method for Follow & unfollow thunk
+const followUnfollowFlow = async (dispatch: Dispatch, id: number, apiMethod: any, action: any) => {
+    dispatch(toggleFollowingProgress(true, id))
+    dispatch(toggleIsFetching(true))
+    let response = await apiMethod(id);
+    if (response.data.resultCode === 0) {
+        dispatch(action(id));
+    }
+    dispatch(toggleFollowingProgress(false, id))
+    dispatch(toggleIsFetching(false))
+}
+
+
 export const followThunk = (id: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(toggleFollowingProgress(true, id))
-        FriendsAPI. unFollow(id)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(unFollow(id))
-                }
-                dispatch(toggleFollowingProgress(false, id))
-            })
+    return  async (dispatch: Dispatch) => {
+         await followUnfollowFlow(dispatch, id,  FriendsAPI.unFollow.bind(id), unFollow)
+
     }
 }
 
- export const unfollowThunk = (friendsId: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(toggleFollowingProgress(true, friendsId))
-        FriendsAPI.follow(friendsId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(follow(friendsId))
-                }
-                dispatch(toggleFollowingProgress(false, friendsId))
-            })
+export const unfollowThunk = (id: number) => {
+    return async (dispatch: Dispatch) => {
+        await followUnfollowFlow(dispatch, id, FriendsAPI.follow.bind(id), follow)
     }
-};
+}
 
 
 const friendsReducer = (state = initialState, action: Action<any>): stateType => {
@@ -140,7 +144,7 @@ const friendsReducer = (state = initialState, action: Action<any>): stateType =>
                 })
             }
 
-        case ActionType.FOLLOW_AC:
+        case ActionType.ON_FOLLOW_AC:
             return {
                 ...state,
                 friends: state.friends.map(fr => {

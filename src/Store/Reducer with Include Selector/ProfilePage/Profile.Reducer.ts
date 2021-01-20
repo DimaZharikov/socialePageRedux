@@ -96,21 +96,22 @@ export interface Action<T> {
     payload: T
 }
 
+// enum string configuration: namePages/{name of component}/actionType
 export enum ActionType {
     //ProfileEnumType
-    SET_PROFILE_USERS = "https://social-network.samuraijs.com/api/1.0/profile",
+    SET_PROFILE_USERS = "https://social-network.samuraijs.com/api/1.0/profile/{getResponse in ProfileComponent}/SET_PROFILE_USERS",
 
     SET_STATUS = 'SET-STATUS',
 
 
     // PostsEnumType
-    ADD_NEW_POST = 'ADD-NEW-POST-ITEM',
-    ON_CHANGE_NEW_POST_TEXT = "ON-CHANGE-NEW-POST-TEXT",
-    ON_REMOVE_POST_HANDLER = "REMOVE-POST",
-    SET_POST_ITEM_AC = "SET-POST-ITEM-AC",
+    ADD_NEW_POST = 'profilePage/{PostWallConteiner}/ADD-NEW-POST-ITEM',
+    ON_CHANGE_NEW_POST_TEXT = "profilePage/{PostWallConteiner}/ON-CHANGE-NEW-POST-TEXT",
+    ON_REMOVE_POST_HANDLER = "profilePage/{PostWallConteiner}/REMOVE-POST",
+    SET_POST_ITEM_AC = "profilePage/{PostWallConteiner}/SET-POST-ITEM-AC",
 
     //Settings
-    TOGGLE_IS_FETCHING = 'TOGGLIE_IS_FETCHING',
+    TOGGLE_IS_FETCHING = 'GlobalConfiguration/TOGGLIE_IS_FETCHING',
 }
 
 //ProfileActionCreater
@@ -119,8 +120,8 @@ export enum ActionType {
 const profilePageReducer = (state = ininitaialState, action: Action<ActionType>) => {
 
     switch (action.type) {
-    //setStatus
-        case ActionType.SET_STATUS:{
+        //setStatus
+        case ActionType.SET_STATUS: {
             return {
                 ...state,
                 status: action.payload
@@ -173,7 +174,7 @@ const profilePageReducer = (state = ininitaialState, action: Action<ActionType>)
     return state
 }
 
-export const setUserProfile = (profile: any): Action<any> => ({
+export const setUserProfile = (profile: profileType): Action<profileType> => ({
     type: ActionType.SET_PROFILE_USERS,
     payload: profile
 })
@@ -202,46 +203,40 @@ export const setItemPostAC = (NewPosts: ItemPostType): Action<ItemPostType> => (
 
 
 //Status
-export const setStatus = (status: string): Action<string> =>({
+export const setStatus = (status: string): Action<string> => ({
     type: ActionType.SET_STATUS,
     payload: status
 })
 
 //settingsActionCreater
-
 export const toggleIsFetching = (isFetching: boolean): Action<boolean> => ({
     type: ActionType.TOGGLE_IS_FETCHING,
     payload: isFetching
 })
 
 
-
 //thunk
 export const getUserProfile = (userId: string) => {
-    return (dispatch: Dispatch) => {
-        ProfileAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setUserProfile(response.data))
-            })
+    return async (dispatch: Dispatch) => {
+        const response = await ProfileAPI.getProfile(userId);
+        dispatch(setUserProfile(response.data))
     }
 }
 
-export const getStatus = (userId: string)   => {
-    return (dispatch: Dispatch) => {
-        ProfileAPI.getStatus(userId)
-            .then (res => {
-                dispatch(setStatus(res.data))
-            })
+export const getStatus = (userId: string) => {
+    return async (dispatch: Dispatch) => {
+        const response = await ProfileAPI.getStatus(userId);
+        dispatch(setStatus(response.data))
     }
 }
 
 export const updateStatus = (status: string) => {
-        return (dispatch: Dispatch) => {
-            ProfileAPI.updateStatus(status).then(res => {
-            if (res.data.resultCode === 0){
+    return async (dispatch: Dispatch) => {
+        const response = await  ProfileAPI.updateStatus(status);
+        if (response.data.resultCode === 0) {
                 dispatch(setStatus(status))
             }
-        })
+
     }
 }
 

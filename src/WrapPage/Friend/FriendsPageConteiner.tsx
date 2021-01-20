@@ -9,11 +9,12 @@ import {
 } from "../../Store/Reducer with Include Selector/FriendsPage/FriendsPage.Reducer";
 
 
-import FriendsComponent from "./FriendsComponent";
+import FriendsPageComponent from "./FriendsPageComponent";
 import {connect} from "react-redux";
 
 import Preloader from "../../common/preloader/Preloader";
 import {itemsBackPropsToFriends} from "../../Store/API/API";
+import {compose} from "redux";
 
 
 interface Props {
@@ -48,7 +49,7 @@ class FriendContainer extends React.Component<Props> {
     render() {
         return <React.Fragment>
             {this.props.isFetching ? <Preloader/> : null}
-            <FriendsComponent
+            <FriendsPageComponent
                 totalFriendCount={this.props.totalFriendCount}
                 pageSize={this.props.pageSize}
                 friends={this.props.friends}
@@ -98,15 +99,14 @@ const mapStateToProps = (state: {
 
 
 
-export default connect(mapStateToProps, {
+export default compose<React.ComponentType> (connect(mapStateToProps, {
 
     setCurrentPage,
     toggleIsFetching,
     toggleFollowingProgress,
     getFriendsThunk,
     followThunk,
-    unfollowThunk
+    unfollowThunk})) (FriendContainer)
 
 
-})(FriendContainer)
 

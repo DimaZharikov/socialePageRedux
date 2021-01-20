@@ -3,8 +3,8 @@ import React from 'react';
 import Navigation from "./StaticPage/Navigation/Navigation";
 import MessagePageAppComponent from "./WrapPage/Message/MessagePageAppComponent";
 import MainPageConteiner from "./WrapPage/Main/MainAppComponent";
-import {BrowserRouter, Route} from "react-router-dom";
-import FriendContainer from "./WrapPage/Friend/FriendConteiner";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import FriendContainer from "./WrapPage/Friend/FriendsPageConteiner";
 import HeaderAppComponent from "./StaticPage/Header/HeaderAppComponent";
 import {DialoguePageContainer} from "./WrapPage/Message/Components/Dialogue/DialogueAppContainer";
 import LogInFormContainer from "./StaticPage/Header/login/LogInFormContainer";
@@ -12,6 +12,7 @@ import Preloader from "./common/preloader/Preloader";
 import {AppRootStateType} from "./Store/Store";
 import {connect} from "react-redux";
 import {initializerApp} from "./Store/Reducer with Include Selector/App/App.Reducer";
+import {compose} from "redux";
 
 
 interface Props {
@@ -66,11 +67,7 @@ const mapStateToProps = (state: AppRootStateType) => ({
 
 
 
-export default connect (mapStateToProps,{initializerApp}) (App) as React.ComponentType
 
-
-
-
-
+export default compose<React.ComponentType> (withRouter,connect (mapStateToProps,{initializerApp})) (App)
 
 

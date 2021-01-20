@@ -106,21 +106,19 @@ interface Action<T> {
     payload: T
 }
 
+// enum string configuration: namePages/{name of component}/actionType
 export enum ActionType {
 
-    SET_SEARCH_FRIENDS_AC = "SET-SEARCH-FRIENDS-AC",
-    ON_SEARCH_FRIENDS_AC = "ON-SERACH-FRIENDS-AC",
+    SET_SEARCH_FRIENDS_AC = "message/{SearchFriendsConteiner}/SET-SEARCH-FRIENDS-AC",
+    ON_SEARCH_FRIENDS_AC = "message/{SearchFriendsConteiner}/ON-SERACH-FRIENDS-AC",
 
 
-    SET_MESSAGE_ITEMS_AC = "SET-MESSAGE-ITEMS-AC",
-    ON_REMOVE_DIALOGUE_ITEMS = "REMOVE-DIALOG-ITEMS",
+    SET_MESSAGE_ITEMS_AC = "message/{MessageItemsConteiner}/SET-MESSAGE-ITEMS-AC",
+    ON_REMOVE_DIALOGUE_ITEMS = "message/{MessageItemsConteiner}/REMOVE-DIALOG-ITEMS",
 
 
 
 }
-
-
-
 
 export const setSearchFriendsAC = (searchFriends: Array<searchFriendType>): Action<Array<searchFriendType>> => ({
     type: ActionType.SET_SEARCH_FRIENDS_AC,

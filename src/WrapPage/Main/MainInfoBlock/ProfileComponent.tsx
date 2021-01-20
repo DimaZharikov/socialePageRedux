@@ -16,9 +16,8 @@ interface Props{
     return(<div key = {profile.userId}>
         <div> Name : {profile.fullName}</div>
         <img src={profile.photos.large} alt=""/>
-        <ProfileStatusComponent status = {status}
-                                updateStatus = {updateStatus}
-        />
+        <ProfileStatusComponent   status = {status}  updateStatus = {updateStatus}     />
+
         <div> About Me : {profile.aboutMe}</div>
         <div>Looking For a Job : {profile.lookingForAJob? 'yes' : profile.lookingForAJobDescription}</div>
         <div>

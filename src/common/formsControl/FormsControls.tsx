@@ -1,5 +1,5 @@
 import React from 'react'
-import  {WrappedFieldInputProps, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
+import {Field, WrappedFieldInputProps, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
 import style from './fromControlStyle.module.css'
 
 
@@ -9,14 +9,13 @@ interface formControlPropsOfParams {
 }
 
 
-
-
-const FormControl: React.FC<formControlPropsOfParams>  = (
+const FormControl: React.FC<formControlPropsOfParams> = (
     {
-      meta: {touched, error}, children                                                      }) => {
+        meta: {touched, error}, children
+    }) => {
     const hasError = touched && error
     return (
-        <div className={style.formControl + "" + (hasError? style.error : '')}>
+        <div className={style.formControl + "" + (hasError ? style.error : '')}>
 
             <div>
                 {children}
@@ -40,30 +39,23 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
 
 }
 
+export const createField = (placeholder: string | undefined,
+                            name: string,
+                            validate: any,
+                            component: React.FC<WrappedFieldProps>,
+                            props = {}, text = ''
+) => (
+    <div>
+        <Field
+            placeholder={placeholder}
+            name={name}
+            component={component}
+            validate={validate}
+            {...props}
+        /> {text}
+    </div>
+)
 
 
-
-
-
-
-
-
-
-
-//
-//     export const createField = (
-//     placeholder: string | undefined, name: string, validators: any,
-//     component: string | React.Component | React.FC,
-//     props= {}, text='' ) => {
-//
-//
-//     return <div>
-//         <Field placeholder={undefined} name = {name}
-//                validate = {validators} component = {component}
-//                {...props}
-//         /> {text}
-//     </div>
-// }
-//
 
 

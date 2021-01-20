@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, PureComponent} from 'react';
 
 
 interface Props {
@@ -10,7 +10,11 @@ interface Props {
 
 
 
-class ProfileStatusComponent extends React.Component<Props> {
+class ProfileStatusComponent extends PureComponent<Props> {
+
+    shouldComponentUpdate(nextProps: Readonly<Props>, nextState: Readonly<{}>): boolean {
+            return  nextProps != this.props || nextState != this.state
+    }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>) {
         if (prevProps.status !== this.props.status){
