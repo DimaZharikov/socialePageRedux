@@ -45,7 +45,8 @@ const FriendsPageComponent: React.FunctionComponent<Props> = React.memo((
         <PaginatorComponent pageSize={pageSize}
                             totalFriendCount={totalFriendCount}
                             onPageChangeHandler={onPageChangeHandler}
-                            currentPage={currentPage}/>
+                            currentPage={currentPage}
+        />
 
         {
             friends.map(item => {

@@ -32,7 +32,6 @@ export const DialoguePageContainer: React.FC <Props> = ({
 
     return <div>
         <ChatComponent chatField = {dialogue.chatField}
-
         />
         < DialogueContainerForm onSubmit={onSubmit} {...props} />
     </div>
