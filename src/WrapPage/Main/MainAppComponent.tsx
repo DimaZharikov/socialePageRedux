@@ -9,7 +9,7 @@ import {Redirect} from "react-router-dom";
 
 
 
-const MainPageConteiner: React.FunctionComponent= React.memo(() => {
+const MainPageConteiner: React.FC= React.memo(() => {
 
     const auth = useSelector<AppRootStateType, authProps>(state => state.authentication);
     if (!auth.isAuth) return <Redirect to={'/logIn'}/>
