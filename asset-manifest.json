@@ -1,32 +1,32 @@
 {
   "files": {
     "main.css": "/socialePageRedux/static/css/main.9b8e9c68.chunk.css",
-    "main.js": "/socialePageRedux/static/js/main.b1f68142.chunk.js",
-    "main.js.map": "/socialePageRedux/static/js/main.b1f68142.chunk.js.map",
-    "runtime-main.js": "/socialePageRedux/static/js/runtime-main.5497a079.js",
-    "runtime-main.js.map": "/socialePageRedux/static/js/runtime-main.5497a079.js.map",
-    "static/js/2.30d28700.chunk.js": "/socialePageRedux/static/js/2.30d28700.chunk.js",
-    "static/js/2.30d28700.chunk.js.map": "/socialePageRedux/static/js/2.30d28700.chunk.js.map",
+    "main.js": "/socialePageRedux/static/js/main.e6640a74.chunk.js",
+    "main.js.map": "/socialePageRedux/static/js/main.e6640a74.chunk.js.map",
+    "runtime-main.js": "/socialePageRedux/static/js/runtime-main.c39c6e6b.js",
+    "runtime-main.js.map": "/socialePageRedux/static/js/runtime-main.c39c6e6b.js.map",
+    "static/js/2.1d5aa957.chunk.js": "/socialePageRedux/static/js/2.1d5aa957.chunk.js",
+    "static/js/2.1d5aa957.chunk.js.map": "/socialePageRedux/static/js/2.1d5aa957.chunk.js.map",
     "static/css/3.8c182cf0.chunk.css": "/socialePageRedux/static/css/3.8c182cf0.chunk.css",
-    "static/js/3.5e5d500d.chunk.js": "/socialePageRedux/static/js/3.5e5d500d.chunk.js",
-    "static/js/3.5e5d500d.chunk.js.map": "/socialePageRedux/static/js/3.5e5d500d.chunk.js.map",
+    "static/js/3.5f3dcc28.chunk.js": "/socialePageRedux/static/js/3.5f3dcc28.chunk.js",
+    "static/js/3.5f3dcc28.chunk.js.map": "/socialePageRedux/static/js/3.5f3dcc28.chunk.js.map",
     "static/js/4.a39586bb.chunk.js": "/socialePageRedux/static/js/4.a39586bb.chunk.js",
     "static/js/4.a39586bb.chunk.js.map": "/socialePageRedux/static/js/4.a39586bb.chunk.js.map",
-    "static/js/5.23651dd9.chunk.js": "/socialePageRedux/static/js/5.23651dd9.chunk.js",
-    "static/js/5.23651dd9.chunk.js.map": "/socialePageRedux/static/js/5.23651dd9.chunk.js.map",
+    "static/js/5.824342b0.chunk.js": "/socialePageRedux/static/js/5.824342b0.chunk.js",
+    "static/js/5.824342b0.chunk.js.map": "/socialePageRedux/static/js/5.824342b0.chunk.js.map",
     "static/js/6.e4a46288.chunk.js": "/socialePageRedux/static/js/6.e4a46288.chunk.js",
     "static/js/6.e4a46288.chunk.js.map": "/socialePageRedux/static/js/6.e4a46288.chunk.js.map",
     "index.html": "/socialePageRedux/index.html",
     "static/css/3.8c182cf0.chunk.css.map": "/socialePageRedux/static/css/3.8c182cf0.chunk.css.map",
     "static/css/main.9b8e9c68.chunk.css.map": "/socialePageRedux/static/css/main.9b8e9c68.chunk.css.map",
-    "static/js/2.30d28700.chunk.js.LICENSE.txt": "/socialePageRedux/static/js/2.30d28700.chunk.js.LICENSE.txt",
-    "static/js/3.5e5d500d.chunk.js.LICENSE.txt": "/socialePageRedux/static/js/3.5e5d500d.chunk.js.LICENSE.txt",
+    "static/js/2.1d5aa957.chunk.js.LICENSE.txt": "/socialePageRedux/static/js/2.1d5aa957.chunk.js.LICENSE.txt",
+    "static/js/3.5f3dcc28.chunk.js.LICENSE.txt": "/socialePageRedux/static/js/3.5f3dcc28.chunk.js.LICENSE.txt",
     "static/media/Ellipsis-4.2s-197px.ce28a318.svg": "/socialePageRedux/static/media/Ellipsis-4.2s-197px.ce28a318.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5497a079.js",
-    "static/js/2.30d28700.chunk.js",
+    "static/js/runtime-main.c39c6e6b.js",
+    "static/js/2.1d5aa957.chunk.js",
     "static/css/main.9b8e9c68.chunk.css",
-    "static/js/main.b1f68142.chunk.js"
+    "static/js/main.e6640a74.chunk.js"
   ]
 }
