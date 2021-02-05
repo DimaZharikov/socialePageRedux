@@ -17,7 +17,7 @@ const MainPageConteiner: React.FC= React.memo(() => {
 
     return (
         <div>
-            <ProfileContainer userId = {auth.data.id}/>
+            <ProfileContainer />
             <PostWallConteiner/>
         </div>
 

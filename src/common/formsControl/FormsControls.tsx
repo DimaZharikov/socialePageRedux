@@ -56,6 +56,7 @@ export const createField = (placeholder: string | undefined,
     </div>
 )
 
+export type GetStringKeys<T> = Extract<keyof T, string>
 
 
 

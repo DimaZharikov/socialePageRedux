@@ -1,11 +1,16 @@
 import axios from "axios";
+import {photosType, profileType} from "../Reducer with Include Selector/ProfilePage/Profile.Reducer";
 
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1
+}
 
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        "API-KEY": "82158368-9872-423e-8911-7846cfbc69d8"
+        "API-KEY": "53463a8d-8572-4c71-942e-6aa342aad633"
     }
 })
 
@@ -47,19 +52,40 @@ export const FriendsAPI = {
 
 }
 
+
+
+
 export const ProfileAPI = {
-    getProfile(userId: string) {
+    getProfile(userId: number) {
         return instance.get(`profile/` + userId)
     },
-    getStatus(userId: string) {
+    getStatus(userId: number) {
         return instance.get ('profile/status/' + userId)
     },
     updateStatus(status:string) {
         return instance.put('profile/status', {
             status: status
         })
+    },
+    savePhoto(photoFile: File) {
+        const formData = new FormData();
+        formData.append("image", photoFile);
+    debugger
+        return instance.put(`profile/photo`, formData,
+            {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(res => res.data)
+    },
+
+    setProfile(profile: profileType) {
+        return instance.put ('profile', profile)
     }
 }
+
+
+
 
 export const  AuthAPI = {
     authenticator(){
