@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {lazy} from 'react';
 
 import Navigation from "./StaticPage/Navigation/Navigation";
-import MessagePageAppComponent from "./WrapPage/Message/MessagePageAppComponent";
+
 import MainPageConteiner from "./WrapPage/Main/MainAppComponent";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
-import FriendContainer from "./WrapPage/Friend/FriendsPageConteiner";
+import {Switch, Route, withRouter, Redirect} from "react-router-dom";
+
 import HeaderAppComponent from "./StaticPage/Header/HeaderAppComponent";
-import {DialoguePageContainer} from "./WrapPage/Message/Components/Dialogue/DialogueAppContainer";
+
 import LogInFormContainer from "./StaticPage/Header/login/LogInFormContainer";
 import Preloader from "./common/preloader/Preloader";
 import {AppRootStateType} from "./Store/Store";
 import {connect} from "react-redux";
 import {initializerApp} from "./Store/Reducer with Include Selector/App/App.Reducer";
 import {compose} from "redux";
+import {withSuspense} from "./common/withSuspense";
+
+const FriendContainer = lazy(():any  => import ("./WrapPage/Friend/FriendsPageConteiner"));
+const MessagePageAppComponent = lazy(():any  => import ("./WrapPage/Message/MessagePageAppComponent"));
+const DialoguePageContainer = lazy(():any  => import ("./WrapPage/Message/Components/Dialogue/DialogueAppContainer"));
 
 
 interface Props {
@@ -23,7 +28,6 @@ interface Props {
 class App extends React.Component <Props>{
 
     componentDidMount() {
-
         this.props.initializerApp()
     }
 
@@ -35,26 +39,31 @@ class App extends React.Component <Props>{
 
         return (<div>
 
-            <BrowserRouter>
+
                 <HeaderAppComponent/>
                 <Navigation/>
 
-
-                <div className='WrapPage -app'>
-                    <Route path='/profile/:userId?' render={() => <MainPageConteiner/>}/>
-
-                    <Route exact path='/friends' render={() => <FriendContainer/>}/>
-
-                    <Route exact path='/Message' component={MessagePageAppComponent}/>
-                    {/*Path to private dialogue from MessagePage/Container */}
-                    <Route path='/dialogue/:userId?' render={() => <DialoguePageContainer/>}/>
+                <Switch>
 
 
-                    {/*redirect*/}
-                    <Route path='/logIn' render={() => <LogInFormContainer/>}/>
-                </div>
+                        <Route exact path={'/'} render ={()=><Redirect to = {'/profile'}/>}/>
 
-            </BrowserRouter>
+                        <Route path='/profile/:userId?' render={() => <MainPageConteiner/>}/>
+
+                        <Route exact path='/friends' render={withSuspense(FriendContainer) }/>
+
+                        <Route exact path='/Message' component={withSuspense(MessagePageAppComponent)}/>
+                        {/*Path to private dialogue from MessagePage/Container */}
+                        <Route path='/dialogue/:userId?' render={withSuspense(DialoguePageContainer)}/>
+
+
+                        {/*redirect*/}
+                        <Route path='/logIn' render={() => <LogInFormContainer/>}/>
+                        <Route path={'*'} render={() => <h1>404: PAGE NOT FOUND</h1>}/>
+
+
+
+                </Switch>
 
         </div>);
 
