@@ -27,9 +27,19 @@ interface Props {
 
 class App extends React.Component <Props>{
 
+
+    catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
+        alert('Some error occured')
+    }
     componentDidMount() {
         this.props.initializerApp()
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+
 
     render() {
 

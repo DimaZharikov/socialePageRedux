@@ -40,7 +40,7 @@ let Paginator: React.FC<PropsType> = ({totalFriendCount, pageSize,
                     [styles.selectedPage]: currentPage === p
                 }, styles.pageNumber) }
                              key={p}
-                             onClick={(event) => {
+                             onClick={(e) => {
                                  onPageChangeHandler(p);
                              }}>{p}</span>
             })}
