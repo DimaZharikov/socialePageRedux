@@ -1,9 +1,15 @@
-import React from "react"
+import React, {ComponentType, ReactNode} from "react"
 
-export function withSuspense<WCP>(WrappedComponent: React.ComponentType<WCP>) {
+class Suspense extends React.Component<{ fallback: JSX.Element, children: ReactNode }> {
+    render() {
+        return null;
+    }
+}
+
+export function withSuspense<WCP>(WrappedComponent: ComponentType<WCP>) {
     return (props: WCP) => {
-        return <React.Suspense fallback={<div>loading...</div>} >
+        return <Suspense fallback={<div>loading...</div>} >
             <WrappedComponent {...props} />
-        </React.Suspense>
+        </Suspense>
     }
 }

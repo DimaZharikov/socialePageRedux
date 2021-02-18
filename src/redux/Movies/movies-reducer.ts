@@ -61,7 +61,9 @@ export const getMovies = (title: string) => async (dispatch: ThunkDispatch<AppSt
 const MoviesReducer = (state = initialState,
                        action: Action<responseMoviesData[] & string>): moviesType => {
     switch (action.type) {
+
         case ActionType.SET_SEARCH_MOVIES:
+            debugger
             return {
                 ...state, data: action.payload
             };
