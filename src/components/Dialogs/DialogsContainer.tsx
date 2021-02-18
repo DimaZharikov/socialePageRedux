@@ -1,5 +1,5 @@
 import React from 'react';
-import {actions} from '../../redux/dialogs-reducer';
+import {actions} from '../../redux/Dialogue/dialogs-reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';

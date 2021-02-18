@@ -1,23 +1,26 @@
 import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./Profile/profile-reducer";
+import dialogsReducer from "./Dialogue/dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import usersReducer from "./users-reducer";
-import authReducer from "./auth-reducer";
+import usersReducer from "./User/users-reducer";
+import authReducer from "./Auth/auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
-import appReducer from "./app-reducer";
-import chatReducer from './chat-reducer'
+import appReducer from "./APP/app-reducer";
+import chatReducer from './Chat/chat-reducer'
+import MoviesReducer from "./Movies/movies-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
+    movies:MoviesReducer,
     auth: authReducer,
     form: formReducer,
     app: appReducer,
-    chat: chatReducer
+    chat: chatReducer,
+
 })
 
 type RootReducerType = typeof rootReducer; // (globalstate: AppStateType) => AppStateType

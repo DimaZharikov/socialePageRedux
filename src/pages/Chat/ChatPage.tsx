@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {ChatMessageAPIType} from '../../api/chat-api'
 import {useDispatch, useSelector} from 'react-redux'
-import {sendMessage, startMessagesListening, stopMessagesListening} from '../../redux/chat-reducer'
+import {sendMessage, startMessagesListening, stopMessagesListening} from '../../redux/Chat/chat-reducer'
 import {AppStateType} from '../../redux/redux-store'
 
 

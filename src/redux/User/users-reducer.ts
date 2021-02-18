@@ -1,9 +1,9 @@
-import {updateObjectInArray} from '../utils/object-helpers'
-import {UserType} from '../types/types'
-import {BaseThunkType, InferActionsTypes} from './redux-store'
+import {updateObjectInArray} from '../../utils/object-helpers'
+import {UserType} from '../../types/types'
+import {BaseThunkType, InferActionsTypes} from '../redux-store'
 import {Dispatch} from 'redux'
-import {usersAPI} from '../api/users-api'
-import {APIResponseType} from '../api/api'
+import {usersAPI} from '../../api/users-api'
+import {APIResponseType} from '../../api/api'
 
 let initialState = {
     users: [] as Array<UserType>,

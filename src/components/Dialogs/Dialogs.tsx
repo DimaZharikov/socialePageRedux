@@ -4,7 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Redirect} from "react-router-dom";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
-import {InitialStateType} from '../../redux/dialogs-reducer';
+import {InitialStateType} from '../../redux/Dialogue/dialogs-reducer';
 
 type PropsType = {
     dialogsPage: InitialStateType

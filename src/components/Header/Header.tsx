@@ -3,8 +3,9 @@ import {Link} from 'react-router-dom'
 import {Avatar, Button, Col, Layout, Menu, Row} from 'antd'
 import {UserOutlined} from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
-import {selectCurrentUserLogin, selectIsAuth} from '../../redux/auth-selectors'
-import {logout} from '../../redux/auth-reducer'
+
+import {logout} from '../../redux/Auth/auth-reducer'
+import {selectCurrentUserLogin, selectIsAuth} from "../../redux/Auth/auth-selector";
 
 export type MapPropsType = {}
 
