@@ -9,3 +9,7 @@ export const selectError = (state: AppStateType) => {
     return state.movies.error
 }
 
+
+export  const selectIsFetching = (state: AppStateType) => {
+    return state.movies.isFetching
+}

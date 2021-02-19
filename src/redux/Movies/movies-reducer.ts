@@ -1,83 +1,67 @@
-import {ThunkDispatch} from "redux-thunk";
 import moviesAPI, {responseMoviesData} from "../../api/movies-api";
-import {AppStateType} from "../redux-store";
+import {BaseThunkType, InferActionsTypes} from "../redux-store";
+import {FormAction} from "redux-form";
 
 
-export type moviesType = {
-    data: responseMoviesData[] | null,
-    error?: string
-
-
-}
-
-
-const initialState: moviesType = {
-    data: null,
+const initialState = {
+    data: [] as responseMoviesData[],
+    error: '' as string,
+    isFetching: false as boolean
 
 
 }
 
 
-//Type
-export enum ActionType {
-    SET_SEARCH_MOVIES = "SN/MOVIES/SET_SEARCH_MOVIES",
-    SET_ERROR = "SN/MOVIES/SET_ERROR"
+export const actions = {
+    setMoviesAC: (movies: Array<responseMoviesData>) => ({
+        type: "SN/MOVIES/GET_MOVIES", movies
+    } as const),
+    nextPageAC: (page: number) => ({
+        type: "SN/MOVIES/SET_PAGE", page
+    } as const),
+    setErrorAC: (error: string) => ({
+        type: "SN/MOVIES/SET_ERROR", error
+    } as const),
+    setFetchingAC: (fetching: boolean) => ({
+        type: "SN/MOVIES/SET_FETCHING", fetching
+    } as const)
+
+}
+
+export const getMoviesTC = (title: string): ThunkType => async (dispatch) => {
+    dispatch(actions.setFetchingAC(true))
+    const res = await moviesAPI.searchFilmsByTitle(title)
+    dispatch(actions.setMoviesAC(res.data.Search))
+    dispatch(actions.setFetchingAC(false))
 
 }
 
 
-//actions
-
-interface Action<T> {
-    type: ActionType,
-    payload: T
-
-}
-
-export const setMovies = (movies: Array<responseMoviesData>): Action<Array<responseMoviesData>> => ({
-    type: ActionType.SET_SEARCH_MOVIES,
-    payload: movies
-})
-
-export const setError = (error: string | undefined): Action<string | undefined> => ({
-    type: ActionType.SET_ERROR,
-    payload: error
-})
-
-//thunk
-
-export const getMovies = (title: string) => async (dispatch: ThunkDispatch<AppStateType, {}, TypeActions>) => {
-     let res = await moviesAPI.searchFilmsByTitle(title)
-    console.log(res)
-        if (res.data.Response === 'true') {
-
-            dispatch(setMovies(res.data.Search))
-        } else (setError(res.data.Error))
-
-
+export const nextPageTC = (page: number, title: string): ThunkType => async (dispatch) => {
+    const res = await moviesAPI.nextPage(page, title)
+    dispatch(actions.nextPageAC(page))
+    dispatch(actions.setMoviesAC(res.data.Search))
 }
 
 
 const MoviesReducer = (state = initialState,
-                       action: Action<responseMoviesData[] & string>): moviesType => {
+                       action: ActionsType): InitialStateType => {
     switch (action.type) {
-
-        case ActionType.SET_SEARCH_MOVIES:
-            debugger
-            return {
-                ...state, data: action.payload
-            };
-            debugger
-        case ActionType.SET_ERROR:
-            return {...state, error: action.payload}
-
+        case "SN/MOVIES/GET_MOVIES":
+            return {...state, data: action.movies}
+        case "SN/MOVIES/SET_PAGE":
+            return {...state, data: [...state.data, ...state.data]}
+        case "SN/MOVIES/SET_FETCHING":
+            return {...state, isFetching: action.fetching}
         default:
             return state
     }
 
 }
 
-type  TypeActions = ReturnType<typeof setMovies> | ReturnType<typeof setError>
 
 export default MoviesReducer
 
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>
+type ThunkType = BaseThunkType<ActionsType | FormAction>

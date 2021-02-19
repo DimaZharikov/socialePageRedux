@@ -47,6 +47,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
 
         return (
             <Layout>
+
                 <Header/>
                 <Content style={{padding: '0 50px'}}>
                     <Breadcrumb style={{margin: '16px 0'}}>
@@ -82,9 +83,9 @@ class App extends Component<MapPropsType & DispatchPropsType> {
                             </Menu>
                         </Sider>
                         <Content style={{padding: '0 24px', minHeight: 280}}>
-
+                       {/*----------------------Wrapped Pages-----------------------------*/}
                            <Routes/>
-
+                        {/*------------------------------------*/}
                         </Content>
                     </Layout>
                 </Content>

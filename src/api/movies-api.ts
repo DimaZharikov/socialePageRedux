@@ -12,7 +12,10 @@ const moviesInstance = axios.create(
 export const moviesAPI = {
     searchFilmsByTitle(title: string) {
         return moviesInstance.get(`${key}&s=${title}`)
-    }
+    },
+    nextPage(page : number, title: string) {
+        return moviesInstance.get(`${key}&s=${title}&page=${page}`  )
+    },
 }
 
 

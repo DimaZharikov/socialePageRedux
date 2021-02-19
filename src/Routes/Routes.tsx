@@ -14,14 +14,14 @@ const VideoContainer = React.lazy(() => import ("../components/Video/VideoContai
 
 
 // //SUSPENDED
-const SuspendedDialogs = withSuspense(DialogsContainer)
-const SuspendedProfile = withSuspense(ProfileContainer)
-const SuspendedChatPage = withSuspense(ChatPage)
-const SuspendedVideoPage = withSuspense(VideoContainer)
+export const SuspendedDialogs = withSuspense(DialogsContainer)
+export const SuspendedProfile = withSuspense(ProfileContainer)
+export const SuspendedChatPage = withSuspense(ChatPage)
+export const SuspendedVideoPage = withSuspense(VideoContainer)
 
 const Routes : FC = () => {
     return (<Fragment>
-        <Switch>
+
             <Switch>
                 <Route exact path='/'
                        render={() => <Redirect to={'/profile'}/>}/>
@@ -47,7 +47,7 @@ const Routes : FC = () => {
                 <Route path='*'
                        render={() => <div>404 NOT FOUND</div>}/>
             </Switch>
-    </Switch>
+
     </Fragment>)
 }
 export default Routes
