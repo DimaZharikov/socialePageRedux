@@ -13,3 +13,8 @@ export const selectError = (state: AppStateType) => {
 export  const selectIsFetching = (state: AppStateType) => {
     return state.movies.isFetching
 }
+
+
+export const selectMovieById = (state : AppStateType) => {
+    return state.movieById.data
+}

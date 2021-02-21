@@ -9,6 +9,7 @@ import {reducer as formReducer} from 'redux-form'
 import appReducer from "./APP/app-reducer";
 import chatReducer from './Chat/chat-reducer'
 import MoviesReducer from "./Movies/movies-reducer";
+import MoviesByIdReducer from "./Movies/moviesById-reducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -16,6 +17,7 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     movies:MoviesReducer,
+    movieById: MoviesByIdReducer,
     auth: authReducer,
     form: formReducer,
     app: appReducer,
