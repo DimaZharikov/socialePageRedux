@@ -104,7 +104,7 @@ let AppContainer = compose<React.ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App)
 
-const SamuraiJSApp: React.FC = () => {
+const JSApp: React.FC = () => {
     return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
@@ -112,4 +112,4 @@ const SamuraiJSApp: React.FC = () => {
     </BrowserRouter>
 }
 
-export default SamuraiJSApp
+export default JSApp

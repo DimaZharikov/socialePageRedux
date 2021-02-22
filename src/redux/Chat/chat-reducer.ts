@@ -10,7 +10,7 @@ import {v1} from 'uuid'
 
 type ChatMessageType = ChatMessageAPIType & {id: string}
 
-let initialState = {
+export let initialState = {
     messages: [] as ChatMessageType[],
     status: 'pending' as StatusType
 }

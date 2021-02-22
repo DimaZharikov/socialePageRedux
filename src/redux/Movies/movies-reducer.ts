@@ -4,7 +4,7 @@ import {FormAction} from "redux-form";
 import {ThunkDispatch} from "redux-thunk";
 
 
-const initialState = {
+export const initialState = {
     data: [] as responseMoviesData[],
     error: '' as string,
     isFetching: false as boolean

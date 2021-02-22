@@ -6,7 +6,7 @@ import {BaseThunkType, InferActionsTypes} from '../redux-store';
 import {Action} from 'redux';
 import {FormAction} from 'redux-form/lib/actions';
 
-let initialState = {
+export let initialState = {
     userId: null as (number | null),
     email: null as string | null,
     login: null as string | null,
