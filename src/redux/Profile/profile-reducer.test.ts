@@ -1,6 +1,4 @@
 import profileReducer, {actions} from './profile-reducer';
-import React from 'react';
-import {ProfileType} from '../../types/types';
 
 let state = {
     posts: [

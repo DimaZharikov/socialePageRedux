@@ -52,16 +52,12 @@ export const getMoviesTC = (title: string) => (dispatch: ThunkDispatch<AppStateT
 
 
 
-
-
-
-
-
-
     export const nextPageTC = (page: number, title: string): ThunkType => async (dispatch) => {
+        dispatch(actions.setFetchingAC(true))
         const res = await moviesAPI.nextPage(page, title)
         dispatch(actions.nextPageAC(page))
         dispatch(actions.setMoviesAC(res.data.Search))
+        dispatch(actions.setFetchingAC(false))
 
     }
 
@@ -70,6 +66,7 @@ export const getMoviesTC = (title: string) => (dispatch: ThunkDispatch<AppStateT
                            action: ActionsType): InitialStateType => {
         switch (action.type) {
             case "SN/MOVIES/GET_MOVIES":
+                debugger
                 return {...state, data: action.movies}
             case "SN/MOVIES/SET_PAGE":
                 return {...state, data: [...state.data, ...state.data]}

@@ -24,6 +24,7 @@ test ('movies should be fined and added to state' , () => {
 
     expect(newState.data.length).toBe(3)
     expect(newState.data).toBeDefined()
+    expect(newState.data).toEqual(newState.data)
 
 })
 
@@ -48,5 +49,5 @@ test ('fetching must changed on true in calling', () => {
 test ('error must be in state', () => {
     const newState = MoviesReducer(state, actions.setErrorAC('any Errors'))
     expect(newState.error).toBeDefined()
-    expect(newState.error).toBe("any Errors")
+    expect(newState.error).toEqual("any Errors")
 })

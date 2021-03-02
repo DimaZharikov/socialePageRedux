@@ -54,6 +54,7 @@ const VideoContainer: FC = memo(() => {
             if (searchName !== '') {
                 setDisabled(false)
                 dispatch(getMoviesTC(searchName))
+
             }
         }
     },[searchName])
