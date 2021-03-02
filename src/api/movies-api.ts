@@ -6,6 +6,7 @@ const key = '?apikey=995f97b1';
 const moviesInstance = axios.create(
     {
         baseURL: `http://www.omdbapi.com/`,
+        withCredentials: true
     }
 )
 

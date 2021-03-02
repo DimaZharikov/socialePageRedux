@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './App.css'
 import 'antd/dist/antd.css'
-import {HashRouter, Link, withRouter} from 'react-router-dom'
+import {BrowserRouter, Link, withRouter} from 'react-router-dom'
 import {connect, Provider} from 'react-redux'
 import {compose} from 'redux'
 import {initializeApp} from './redux/APP/app-reducer'
@@ -105,11 +105,11 @@ let AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {initializeApp}))(App)
 
 const JSApp: React.FC = () => {
-    return <HashRouter>
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </HashRouter>
+    </BrowserRouter>
 }
 
 export default JSApp
